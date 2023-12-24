@@ -26,3 +26,14 @@ pods
 
 replicasets
 
+deployment
+
+Useful link bookmark for exam as well
+https://kubernetes.io/docs/reference/kubectl/conventions/
+
+Basically use -o yaml to create yaml template instead of writing 
+and use --dry-run=client to test if your cmd is going to run fine without running it 
+e.g.
+
+kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
+
