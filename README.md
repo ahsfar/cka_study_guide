@@ -43,8 +43,21 @@ ClusterIP: Default service
 Loadbalancer: for frontend connecting to outside world. Uses native load balancing of cloud e.g. GCP, AWS, Azure, etc
 
 k get svc
+
 => Namespaces:
 Resource Quota, default DNS between different DNS, 3 namespaces by default (default, kube-system, kube-public)
 k get pods -A
 k get svc -n=marketing
 
+=> Imperative vs Declerative 
+
+Step by step (cmd's e.g. k edit/get/scale/create/run) vs config (yaml e.g. terraform, ansible, chef, k apply -f name.yml)
+
+k run httpd --image=httpd:alpine --port=80 --expose
+k create deployment redis-deploy --image=redis --replicas=2 --namespace=dev-ns
+k run custom-nginx --image=nginx --port=8080
+k create deployment --image=kodekloud/webapp-color --replicas=3 webapp
+k create service clusterip redis-service --tcp=6379:6379 or k expose pod redis --port 6379 --name redis-service
+k describe svc redis-service
+k run --image=redis:alpine redis --labels=tier=db
+k create ns dev-ns
