@@ -68,3 +68,7 @@ k describe svc redis-service
 k run --image=redis:alpine redis --labels=tier=db
 
 k create ns dev-ns
+
+=> Kubectl apply
+It creates a live object config add some extra tags and also creates json format to keep track of the last modified config and compares the old and new to see what actions to perform on the file.
+
