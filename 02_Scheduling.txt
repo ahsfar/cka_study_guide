@@ -1,1 +1,21 @@
+Scheduling:
+
+
+Manual Scheduling:
+
+1) While creating pod
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  nodeName: controlplane     ---> controlplane is the node name
+  containers:
+  -  image: nginx
+     name: nginx
+
+
+2) Act as scheduler and bind data to pod, convert ur yaml to json 
 
