@@ -19,3 +19,7 @@ spec:
 
 2) Act as scheduler and bind data to pod, convert ur yaml to json 
 
+
+
+kubectl get nodes
+kubectl get pods -o wide
