@@ -23,3 +23,33 @@ spec:
 
 kubectl get nodes
 kubectl get pods -o wide
+
+
+kubectl get pods --selector env=dev
+kubectl get pods --selector env=dev --no-headers | wc -l
+kubectl get pods --selector bu=finance --no-headers | wc -l
+kubectl get all --selector env=prod --no-headers | wc -l
+kubectl get all --selector env=prod,bu=finance,tier=frontend
+
+
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+   name: replicaset-1
+spec:
+   replicas: 2
+   selector:
+      matchLabels:
+        tier: front-end   
+   template:
+     metadata:
+       labels:
+        tier: front-end         ----------------------> changed from nginx to front-end (matched the labels)
+     spec:
+       containers:
+       - name: nginx
+         image: nginx 
+
+kubectl apply -f replicaset-definition-1.yaml
+
