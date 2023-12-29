@@ -185,3 +185,5 @@ resources: (min)
 limits: (max)
 min=yes max=no is ideal case.
 Throttle -> if resources exceeds will error out e.g. OOM (out of memeory)
+
+->ResourceQuota.yml set on namesapce level hardcoded to limit all the resources (eg.g cpu and mem)
