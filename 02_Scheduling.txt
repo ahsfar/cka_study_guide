@@ -181,9 +181,7 @@ You can use both Taints & Tolerations and Node Affinity to get the more complex/
 => Resource limits:
 
 in yaml file:
-resources:
-
-limits:
-
-
+resources: (min)
+limits: (max)
+min=yes max=no is ideal case.
 Throttle -> if resources exceeds will error out e.g. OOM (out of memeory)
