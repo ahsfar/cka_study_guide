@@ -5,6 +5,20 @@
 
 1) While creating pod
 
+<details><summary>show</summary>
+<p>
+  
+```bash
+cmds
+```
+
+</p>
+</details>
+
+<details><summary>show</summary>
+<p>
+  
+```bash
 ---
 apiVersion: v1
 kind: Pod
@@ -15,12 +29,20 @@ spec:
   containers:
   -  image: nginx
      name: nginx
+```
+
+</p>
+</details>
 
 
-### Act as scheduler and bind data to pod, convert ur yaml to json 
+
+2) Act as scheduler and bind data to pod, convert ur yaml to json 
 
 
-
+<details><summary>show</summary>
+<p>
+  
+```bash
 kubectl get nodes
 kubectl get pods -o wide
 
@@ -52,6 +74,11 @@ spec:
          image: nginx 
 
 kubectl apply -f replicaset-definition-1.yaml
+```
+
+</p>
+</details>
+
 
 ### Taints & Toleration:
 
@@ -100,6 +127,10 @@ RequireDuringSchedulingIgnoredDuringExecution:
 PrefferedDuringSchedulingIgnoredDuringExecution:
 RequireDuringSchedulingRequiredDuringExecution:
 
+<details><summary>show</summary>
+<p>
+  
+```bash
 k describe node01
 k describe node node01
 k label node node01 color=blue
@@ -175,6 +206,11 @@ status: {}
 
 
 ----------
+```
+
+</p>
+</details>
+
 You can use both Taints & Tolerations and Node Affinity to get the more complex/desired results.
 
 
