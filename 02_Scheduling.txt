@@ -88,4 +88,16 @@ kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedul
 //The - at the end indicates that we want to remove this taint from the node.
 k edit node controlplane
 
+=> Node Selector:
+
+lablel nodes to select them later for the pod to be deployed to.
+
+=> Node Affinity:
+
+For complex labeling
+In Large,Medium.. or Not In Small
+RequireDuringSchedulingIgnoredDuringExecution:
+PrefferedDuringSchedulingIgnoredDuringExecution:
+RequireDuringSchedulingRequiredDuringExecution:
+
 
