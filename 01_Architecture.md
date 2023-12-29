@@ -17,13 +17,31 @@ kubectl get daemonset -n kube-system
 => pods
 kubectl get pods
 
-=> replicasets 
+
+
+###  Replicasets 
+<details><summary>show</summary>
+<p>
+
+```bash
 kubectl get replicaset
 kubectl create f replicaset definition.yml
 kubectl get replicaset
 kubectl delete replicaset myapp replicaset *Also deletes all underlying PODs
 kubectl replace f replicaset definition.yml
 kubectl scale replicas=6 f replicaset definition.yml
+```
+
+</p>
+</details>
+
+### Know various ways to configure applications
+
+<details><summary>show</summary>
+<p>
+
+
+
 
 
 => deployment
