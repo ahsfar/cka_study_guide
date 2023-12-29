@@ -63,3 +63,28 @@ kubectl taint nodes node01 spray=mortein:NoSchedule
 
 Tolearation is for the pods if they can still go to that node even if it's taint. It's to control which particular pod can go on a node.
 
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bee
+spec:
+  containers:
+  - image: nginx
+    name: bee
+  tolerations:
+  - key: spray
+    value: mortein
+    effect: NoSchedule
+    operator: Equal
+
+kubectl create -f bee-pod.yaml
+
+k describe node controlplane
+
+// Confirm the taint, remove the taint and then confirm the taint again.
+k edit node controlplane
+kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+k edit node controlplane
+
+
