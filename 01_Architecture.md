@@ -1,22 +1,76 @@
 # Kubernetes Architecture (Cluster Architecture)
 
-=> Docker vs Container D
 
-=> ETCD
+### Docker vs Container D
+<details><summary>show</summary>
+<p>
+```bash
+cmds
+```
+</p>
+</details>
 
-=> Kube apiserver
+### ETCD
+<details><summary>show</summary>
+<p>
+```bash
+cmds
+```
+</p>
+</details>
 
-=> Kube controller managet
+### Kube apiserver
+<details><summary>show</summary>
+<p>
+```bash
+cmds
+```
+</p>
+</details>
 
-=> kubelet
+###  Kube controller managet
+<details><summary>show</summary>
+<p>
+```bash
+cmds
+```
+</p>
+</details>
 
-=> Kube proxy 
+###  kubelet
+<details><summary>show</summary>
+<p>
+```bash
+cmds
+```
+</p>
+</details>
+
+
+###  Kube proxy 
+<details><summary>show</summary>
+<p>
+
+```bash
 kubectl get pods -n kube-system
 kubectl get daemonset -n kube-system
+```
 
-=> pods
+</p>
+</details>
+
+
+
+###  Pods
+<details><summary>show</summary>
+<p>
+
+```bash
 kubectl get pods
+```
 
+</p>
+</details>
 
 
 ###  Replicasets 
@@ -65,25 +119,40 @@ kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o y
 </p>
 </details>
 
-=> Services
+### Services
+<details><summary>show</summary>
+<p>
 Nodeport: target port:#, port:#, NodePort:# for outside world connectivity to the pod running container
 ClusterIP: Default service
 Loadbalancer: for frontend connecting to outside world. Uses native load balancing of cloud e.g. GCP, AWS, Azure, etc
 
+```bash
 k get svc
+```
+</p>
+</details>
 
-=> Namespaces:
+### Namespaces
+<details><summary>show</summary>
+<p>
 Resource Quota, default DNS between different DNS, 3 namespaces by default (default, kube-system, kube-public)
+```bash
 k get pods -A
 k get svc -n=marketing
 kubectl config set-context $(kubectl config current-context) --namespace=prod
 kubectl get pods --namespace=default
 kubectl get pods --all-namespaces
+```
+</p>
+</details>
 
-=> Imperative vs Declerative 
 
-Step by step (cmd's e.g. k edit/get/scale/create/run) vs config (yaml e.g. terraform, ansible, chef, k apply -f name.yml)
+### Imperative vs Declerative 
+<details><summary>show</summary>
+<p>
+  Step by step (cmd's e.g. k edit/get/scale/create/run) vs config (yaml e.g. terraform, ansible, chef, k apply -f name.yml)
 
+```bash
 k run httpd --image=httpd:alpine --port=80 --expose
 
 k create deployment redis-deploy --image=redis --replicas=2 --namespace=dev-ns
@@ -99,11 +168,16 @@ k describe svc redis-service
 k run --image=redis:alpine redis --labels=tier=db
 
 k create ns dev-ns
+```
+</p>
+</details>
 
-=> Kubectl apply
-It creates a live object config add some extra tags and also creates json format to keep track of the last modified config and compares the old and new to see what actions to perform on the file.
+### Kubectl apply
+<details><summary>show</summary>
+<p>
+  It creates a live object config add some extra tags and also creates json format to keep track of the last modified config and compares the old and new to see what actions to perform on the file.
 
-
+```bash
 kubectl apply f deployment definition.yml
 kubectl run nginx image= nginx
 
@@ -115,17 +189,33 @@ kubectl set image deployment/ myapp deployment nginx =nginx:1.9.1           (Upd
 kubectl rollout status deployment/ myapp deployment                         (Status)
 kubectl rollout history deployment/ myapp deployment                        (Status)
 kubectl rollout undo deployment/ myapp deployment                           (Rollback)
+```
+</p>
+</details>
 
 
-Exam Tips
-Create Objects
+
+
+
+### Exam Tips
+<details><summary>show</summary>
+<p>
+```bash
+ Create Objects
 kubectl apply f nginx.yaml
 kubectl run image= nginx nginx
 kubectl create deployment image= nginx nginx
 kubectl expose deployment nginx port 80
 
-Update Objects
+  Update Objects
 kubectl apply f nginx.yaml
 kubectl edit deployment nginx
 kubectl scale deployment nginx replicas=5
 kubectl set image deployment nginx nginx =nginx:1.18
+```
+</p>
+</details>
+
+
+
+
