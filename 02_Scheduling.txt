@@ -172,3 +172,18 @@ spec:
               - key: node-role.kubernetes.io/control-plane
                 operator: Exists
 status: {}
+
+
+----------
+You can use both Taints & Tolerations and Node Affinity to get the more complex/desired results.
+
+
+=> Resource limits:
+
+in yaml file:
+resources:
+
+limits:
+
+
+Throttle -> if resources exceeds will error out e.g. OOM (out of memeory)
