@@ -1,7 +1,7 @@
 # Scheduling:
 
 
-=> Manual Scheduling:
+### Manual Scheduling:
 
 1) While creating pod
 
@@ -17,7 +17,7 @@ spec:
      name: nginx
 
 
-2) Act as scheduler and bind data to pod, convert ur yaml to json 
+### Act as scheduler and bind data to pod, convert ur yaml to json 
 
 
 
@@ -53,7 +53,7 @@ spec:
 
 kubectl apply -f replicaset-definition-1.yaml
 
-=> Taints & Toleration:
+### Taints & Toleration:
 
 Taints are like anti-bug repellent spray on nodes to control which pods are deployed on them. By default master node is tainted that's why no pods are scheduled on the master node by scheduler.
 
@@ -88,11 +88,11 @@ kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedul
 //The - at the end indicates that we want to remove this taint from the node.
 k edit node controlplane
 
-=> Node Selector:
+### Node Selector:
 
 lablel nodes to select them later for the pod to be deployed to.
 
-=> Node Affinity:
+### Node Affinity:
 
 For complex labeling
 In Large,Medium.. or Not In Small
@@ -178,7 +178,7 @@ status: {}
 You can use both Taints & Tolerations and Node Affinity to get the more complex/desired results.
 
 
-=> Resource limits:
+### Resource limits:
 
 in yaml file:
 resources: (min)
@@ -186,4 +186,4 @@ limits: (max)
 min=yes max=no is ideal case.
 Throttle -> if resources exceeds will error out e.g. OOM (out of memeory)
 
-->ResourceQuota.yml set on namesapce level hardcoded to limit all the resources (eg.g cpu and mem)
+### ResourceQuota.yml set on namesapce level hardcoded to limit all the resources (eg.g cpu and mem)
