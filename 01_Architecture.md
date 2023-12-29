@@ -118,12 +118,6 @@ kubectl get all
 
 
 
-Useful link bookmark for exam as well
-https://kubernetes.io/docs/reference/kubectl/conventions/
-
-Basically use -o yaml to create yaml template instead of writing 
-and use --dry-run=client to test if your cmd is going to run fine without running it 
-e.g.
 
 ```bash
 kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
@@ -132,12 +126,21 @@ kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o y
 </p>
 </details>
 
+Useful link bookmark for exam as well
+https://kubernetes.io/docs/reference/kubectl/conventions/
+
+Basically use -o yaml to create yaml template instead of writing 
+and use --dry-run=client to test if your cmd is going to run fine without running it 
+e.g.
+
+
 ### Services
-<details><summary>show</summary>
-<p>
 Nodeport: target port:#, port:#, NodePort:# for outside world connectivity to the pod running container
 ClusterIP: Default service
 Loadbalancer: for frontend connecting to outside world. Uses native load balancing of cloud e.g. GCP, AWS, Azure, etc
+
+<details><summary>show</summary>
+<p>
 
 ```bash
 k get svc
@@ -146,10 +149,12 @@ k get svc
 </details>
 
 ### Namespaces
-<details><summary>show</summary>
-<p>
 Resource Quota, default DNS between different DNS, 3 namespaces by default (default, kube-system, kube-public)
   
+<details><summary>show</summary>
+<p>
+
+
 ```bash
 k get pods -A
 k get svc -n=marketing
@@ -162,9 +167,10 @@ kubectl get pods --all-namespaces
 
 
 ### Imperative vs Declerative 
+  Step by step (cmd's e.g. k edit/get/scale/create/run) vs config (yaml e.g. terraform, ansible, chef, k apply -f name.yml)
+
 <details><summary>show</summary>
 <p>
-  Step by step (cmd's e.g. k edit/get/scale/create/run) vs config (yaml e.g. terraform, ansible, chef, k apply -f name.yml)
 
 ```bash
 k run httpd --image=httpd:alpine --port=80 --expose
@@ -187,9 +193,10 @@ k create ns dev-ns
 </details>
 
 ### Kubectl apply
+  It creates a live object config add some extra tags and also creates json format to keep track of the last modified config and compares the old and new to see what actions to perform on the file.
 <details><summary>show</summary>
 <p>
-  It creates a live object config add some extra tags and also creates json format to keep track of the last modified config and compares the old and new to see what actions to perform on the file.
+
 
 ```bash
 kubectl apply f deployment definition.yml
