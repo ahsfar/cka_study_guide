@@ -149,6 +149,7 @@ k get svc
 <details><summary>show</summary>
 <p>
 Resource Quota, default DNS between different DNS, 3 namespaces by default (default, kube-system, kube-public)
+  
 ```bash
 k get pods -A
 k get svc -n=marketing
@@ -213,6 +214,7 @@ kubectl rollout undo deployment/ myapp deployment                           (Rol
 ### Exam Tips
 <details><summary>show</summary>
 <p>
+  
 ```bash
  Create Objects
 kubectl apply f nginx.yaml
