@@ -85,6 +85,7 @@ k describe node controlplane
 // Confirm the taint, remove the taint and then confirm the taint again.
 k edit node controlplane
 kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+//The - at the end indicates that we want to remove this taint from the node.
 k edit node controlplane
 
 
