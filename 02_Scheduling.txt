@@ -100,4 +100,41 @@ RequireDuringSchedulingIgnoredDuringExecution:
 PrefferedDuringSchedulingIgnoredDuringExecution:
 RequireDuringSchedulingRequiredDuringExecution:
 
+k describe node01
+k describe node node01
+k label node node01 color=blue
+k describe node node01
 
+kubectl create deployment blue --image=nginx --replicas=3
+
+kubectl get nodes --show-labels
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: nginx
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+      affinity:                            -----> added afinity section under below container to move the blue deployment only to node which has label color=blue
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: color
+                operator: In
+                values:
+                - blue
