@@ -4,51 +4,64 @@
 ### Docker vs Container D
 <details><summary>show</summary>
 <p>
+  
 ```bash
 cmds
 ```
+
 </p>
 </details>
 
 ### ETCD
 <details><summary>show</summary>
 <p>
+  
 ```bash
 cmds
 ```
+
 </p>
 </details>
 
 ### Kube apiserver
 <details><summary>show</summary>
 <p>
+  
 ```bash
 cmds
 ```
+
 </p>
 </details>
 
 ###  Kube controller managet
 <details><summary>show</summary>
 <p>
+  
 ```bash
 cmds
 ```
+
 </p>
 </details>
 
 ###  kubelet
 <details><summary>show</summary>
 <p>
+
 ```bash
+  
 cmds
+
 ```
+
 </p>
 </details>
 
 
 ###  Kube proxy 
 <details><summary>show</summary>
+
 <p>
 
 ```bash
