@@ -1,7 +1,7 @@
-# Scheduling:
+# Scheduling
 
 
-### Manual Scheduling:
+### Manual Scheduling
 
 1) While creating pod
 
@@ -80,7 +80,7 @@ kubectl apply -f replicaset-definition-1.yaml
 </details>
 
 
-### Taints & Toleration:
+### Taints & Toleration
 
 Taints are like anti-bug repellent spray on nodes to control which pods are deployed on them. By default master node is tainted that's why no pods are scheduled on the master node by scheduler.
 
@@ -115,11 +115,11 @@ kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedul
 //The - at the end indicates that we want to remove this taint from the node.
 k edit node controlplane
 
-### Node Selector:
+### Node Selector
 
 lablel nodes to select them later for the pod to be deployed to.
 
-### Node Affinity:
+### Node Affinity
 
 For complex labeling
 In Large,Medium.. or Not In Small
@@ -214,7 +214,7 @@ status: {}
 You can use both Taints & Tolerations and Node Affinity to get the more complex/desired results.
 
 
-### Resource limits:
+### Resource limits
 
 in yaml file:
 resources: (min)
@@ -223,3 +223,37 @@ min=yes max=no is ideal case.
 Throttle -> if resources exceeds will error out e.g. OOM (out of memeory)
 
 ### ResourceQuota.yml set on namesapce level hardcoded to limit all the resources (eg.g cpu and mem)
+
+
+### DaemonSets
+
+Just like replicasets a copy of your pod is presetn as daemonset on each node. It is useful for monitoring and logging and also for networking if any changes happen on the actual pod. It used to use nodeNames to make sure deemonset pod is available on pods but now it uses node affinity and scheduler.
+
+<details><summary>show</summary>
+<p>
+  
+```bash
+kubectl get daemonsets --all-namespaces
+k describe po --namespace=kube-flannel
+k create deployment elasticsearch --image=registry.k8s.io/fluentd-elasticsearch:1.20 -n kube-system --dry-run=client -o yaml > fluentd.yaml
+ls
+cat fluentd.yaml 
+vim fluentd.yaml 
+cat fluentd.yaml 
+k create -f fluentd.yaml
+k get ds --all-namespaces
+
+```
+
+
+### Static Pods
+
+smth about static pod
+
+<details><summary>show</summary>
+<p>
+  
+```bash
+cmds
+
+```
