@@ -1,7 +1,9 @@
-# cka_study_guide
-documenting commands for cka cert prep journey
+# Certified Kubernetes Administrator (CKA) Guide
+documenting commands, manifest and useful tips for CKA cert prep journey
 
-Course I'm follwoing is from Mumshad on Udemy it's the highest rated course for CKA.
+Udemy Course from Mumshad
+
+
 
 
 
