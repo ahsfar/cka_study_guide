@@ -84,9 +84,17 @@ kubectl apply -f replicaset-definition-1.yaml
 
 Taints are like anti-bug repellent spray on nodes to control which pods are deployed on them. By default master node is tainted that's why no pods are scheduled on the master node by scheduler.
 
+
+<details><summary>show</summary>
+<p>
+  
+```bash
 kubectl describe node node01 | grep -i taints
 kubectl taint nodes node01 spray=mortein:NoSchedule
 
+```
+</p>
+</details>
 
 Tolearation is for the pods if they can still go to that node even if it's taint. It's to control which particular pod can go on a node.
 
