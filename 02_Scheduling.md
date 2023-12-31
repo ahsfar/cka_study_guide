@@ -292,12 +292,26 @@ kubectl get pods --all-namespaces -o wide  | grep static-greenbox
 
 ### Multiple Schedulers
 
-smth about Multiple Schedulers
+You can have your own schedulers and create pods by it.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-cmds
+k get pod kube-scheduler-controlplane --namespace=kube-system
+k describe pod kube-scheduler-controlplane --namespace=kube-system
+k get serviceaccount -n kube-system 
+k get clusterrolebinding
+ls
+k create -f my-scheduler-configmap.yaml 
+cat my-scheduler.yaml
+vim  my-scheduler.yaml
+k create -f my-scheduler.yaml 
+ls
+cat nginx-pod.yaml 
+vim nginx-pod.yaml 
+k create -f nginx-pod.yaml 
+k get pods
+
 
 ```
