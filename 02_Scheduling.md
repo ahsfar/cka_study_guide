@@ -248,7 +248,31 @@ k get ds --all-namespaces
 
 ### Static Pods
 
-smth about static pod
+Kubelet is pod level element. If no master node is available kubelet can create static pods if we put pod definitons file in
+/etc/kubernetes/manifest 
+directory
+
+<details><summary>show</summary>
+<p>
+  
+```bash
+kubelet.service
+kubectl get pods --all-namespaces
+kubectl get pods --all-namespaces -o wide //to find static pod on which nodes
+ps -aux | grep kubelet
+cat /var/lib/kubelet/config.yaml | grep staticPodPath // find staicpod path
+grep -i staticpod /var/lib/kubelet/config.yaml // same as above find static pod path
+cat kube-apiserver.yaml | grep -i image
+kubectl run --restart=Never --image=busybox static-busybox --dry-run=client -o yaml --command -- sleep 1000 > /etc/kubernetes/manifests/static-busybox.yaml // to create a static pod
+kubectl get nodes -o wide
+/var/lib/kubelet/config.yaml
+kubectl get pods --all-namespaces -o wide  | grep static-greenbox
+
+```
+
+### Multiple Schedulers
+
+smth about Multiple Schedulers
 
 <details><summary>show</summary>
 <p>
