@@ -244,7 +244,8 @@ k create -f fluentd.yaml
 k get ds --all-namespaces
 
 ```
-
+</p>
+</details>
 
 ### Static Pods
 
@@ -269,6 +270,8 @@ kubectl get nodes -o wide
 kubectl get pods --all-namespaces -o wide  | grep static-greenbox
 
 ```
+</p>
+</details>
 
 ### Multiple Schedulers
 
