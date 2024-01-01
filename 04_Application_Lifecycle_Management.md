@@ -115,18 +115,83 @@ spec:
 
 ### Environment Variables
 
-tct
+Just like while running docker command you can pass docker environement variables. In pod definition.yaml file you can have env as below:
+
+1) plain key value
+2) configMap
+3) Secrets
+
+
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+config-map.yaml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_COLOR: blue
+  APP_MODE: prod
+
+kubectl create –f config-map.yaml
+kubectl get configmaps
+kubectl describe configmaps
+
+Link in pod:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-webapp-color
+  labels:
+    name: simple-webapp-color
+spec:
+  containers:
+    - name: simple-webapp-color
+      image: simple-webapp-color
+      ports:
+      - containerPort: 8080
+      envFrom:
+        - configMapRef:
+              name: app-config
+
+
+
+
 ```
 
 </p>
 </details>
 
+<details><summary>show</summary>
+<p>
+  
+```bash
+=> ENV
+envFrom:
+  - configMapRef
+        name: app config
+
+=> SINGLE ENV
+env:
+  - name: APP_COLOR
+    valueFrom:
+        configMapKeyRef:
+            name: app config
+            key: APP_COLOR
+
+=> VOLUME
+volumes:
+  - name: app config volume
+    configMap:
+        name: app config
+```
+
+</p>
+</details>
 ### Secrets
 
 tct
