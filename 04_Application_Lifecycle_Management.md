@@ -45,15 +45,69 @@ k describe po frontend-744f8c4fd4-
 </p>
 </details>
 
-### Test Commands
+### Commands and Arguments
 
-tct
+Just lik in docker file you can have ENTRYPOINT and CMD. And also pass arguements when entring docker run command. You can have in pod-definition file as well.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+---
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: ubuntu-sleeper-2 
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    command:
+      - "sleep"
+      - "5000"
+
+Dockerfile
+FROM python:3.6-alpine
+
+RUN pip install flask
+
+COPY . /opt/
+
+EXPOSE 8080
+
+WORKDIR /opt
+
+ENTRYPOINT ["python", "app.py"]
+
+CMD ["--color", "red"]
+
+Pod.yaml
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: webapp-green
+  labels:
+      name: webapp-green 
+spec:
+  containers:
+  - name: simple-webapp
+    image: kodekloud/webapp-color
+    command: ["python", "app.py"]
+    args: ["--color", "pink"]
+
+e.g.
+---
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: webapp-green
+  labels:
+      name: webapp-green 
+spec:
+  containers:
+  - name: simple-webapp
+    image: kodekloud/webapp-color
+    args: ["--color", "green"]
 ```
 
 </p>
