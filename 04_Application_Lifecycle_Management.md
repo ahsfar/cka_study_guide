@@ -117,11 +117,9 @@ spec:
 
 Just like while running docker command you can pass docker environement variables. In pod definition.yaml file you can have env as below:
 
-1) plain key value
-2) configMap
+1) Plain key value
+2) ConfigMap
 3) Secrets
-
-
 
 <details><summary>show</summary>
 <p>
@@ -160,11 +158,39 @@ spec:
 
 
 
+kubectl create configmap  webapp-config-map --from-literal=APP_COLOR=darkblue --from-literal=APP_OTHER=disregard
+
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: webapp-color
+  name: webapp-color
+  namespace: default
+spec:
+  containers:
+  - env:
+    - name: APP_COLOR
+      valueFrom:
+       configMapKeyRef:
+         name: webapp-config-map
+         key: APP_COLOR
+    image: kodekloud/webapp-color
+    name: webapp-color
+
 
 ```
 
 </p>
 </details>
+
+There are two ways to create config maps
+Imperative: write commands or pass a file
+Declarative: write a dfinition file and create that file like pods
+
+Injecting the configMap into the pod definition files:
 
 <details><summary>show</summary>
 <p>
@@ -193,16 +219,26 @@ volumes:
 </p>
 </details>
 
-
 ### Secrets
 
-tct
+ConfigMaps just centralize the data or you can catagrize the data or environment variables in different definition files in text. Secrets come in when you want to pass passwords or sensitive informatoin. 
+Which you can encode or decode in base64 and then inject in the pod definition file.
+There are two ways to create 
+Imperative: write commands or pass a file
+Declarative: write a dfinition file and create that file like pods
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+kubectl create –f secret-data.yaml
+
+echo –n ‘mysql’ | base64
+echo –n ‘bXlzcWw=’ | base64 --decode
+
+kubectl get secrets
+kubectl describe secrets
+kubectl get secret app-secret –o yaml
 ```
 
 </p>
