@@ -96,6 +96,9 @@ spec:
     args: ["--color", "pink"]
 
 e.g.
+<details><summary>show</summary>
+<p>
+```bash
 ---
 apiVersion: v1 
 kind: Pod 
@@ -108,6 +111,9 @@ spec:
   - name: simple-webapp
     image: kodekloud/webapp-color
     args: ["--color", "green"]
+```
+</p>
+</details>
 ```
 
 </p>
