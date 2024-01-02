@@ -340,6 +340,10 @@ spec:
     command: 
       - "sleep"
       - "20"
+
+kubectl get pod orange -o yaml > /root/orange.yaml
+kubectl delete pod orange
+kubectl create -f /root/orange.yaml
 ```
 
 </p>
