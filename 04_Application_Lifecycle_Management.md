@@ -314,13 +314,32 @@ spec:
 
 ### Innit Conatiners
 
-tct
+Innit containers are processes that run in the pod for the main process and they're termianted after their use is finished.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: red
+  namespace: default
+spec:
+  containers:
+  - command:
+    - sh
+    - -c
+    - echo The app is running! && sleep 3600
+    image: busybox:1.28
+    name: red-container
+  initContainers:
+  - image: busybox
+    name: red-initcontainer
+    command: 
+      - "sleep"
+      - "20"
 ```
 
 </p>
