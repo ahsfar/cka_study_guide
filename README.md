@@ -7,7 +7,7 @@ The references were selected for the [Exam Curriculum 1.27](https://github.com/c
 
 # Exam
 
-The exam is performance based, where you have some problems to fix within 180 minutes.
+The exam is performance based, where you have some problems to fix within 120 minutes.
 
 Exam Cost: $395 and includes one free retake.
 
