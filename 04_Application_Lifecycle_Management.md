@@ -265,13 +265,48 @@ spec:
 
 ### Multi-container Pods
 
-tct
+Instead of having one moolithic app. We can have microservices and multicontainer pod. And can create log agent or other necessasry containers which will help connect networking and storage between pods.
 
 <details><summary>show</summary>
 <p>
-  
+
 ```bash
-k logs webapp-1
+In pod definiton.yaml under container add the other containers.
+-name: log-agent
+
+kubectl -n elastic-stack logs kibana
+kubectl -n elastic-stack exec -it app -- cat /log/app.log
+
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+  namespace: elastic-stack
+  labels:
+    name: app
+spec:
+  containers:
+  - name: app
+    image: kodekloud/event-simulator
+    volumeMounts:
+    - mountPath: /log
+      name: log-volume
+
+  - name: sidecar
+    image: kodekloud/filebeat-configured
+    volumeMounts:
+    - mountPath: /var/log/event-simulator/
+      name: log-volume
+
+  volumes:
+  - name: log-volume
+    hostPath:
+      # directory location on host
+      path: /var/log/webapp
+      # this field is optional
+      type: DirectoryOrCreate
 ```
 
 </p>
