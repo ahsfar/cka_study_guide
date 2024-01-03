@@ -68,7 +68,7 @@ systemctl restart kubelet
 </p>
 </details>
 
-Upgrading Workder controlplane from 1.26.0 to 1.27.0
+Upgrading controlplane from 1.26.0 to 1.27.0
 
 <details><summary>controlplane</summary>
 <p>
@@ -115,7 +115,8 @@ k get nodes
 </p>
 </details>
 
-Upgrading Workder node from 1.26.0 to 1.27.0
+Upgrading Worker node from 1.26.0 to 1.27.0
+
 <details><summary>workder node</summary>
 <p>
   
@@ -143,14 +144,60 @@ kubectl uncordon node01
 
 ### Backup and Restore Method 1
 
-tct
+1) Resoruce config => kubeapi-server (Externel tool can be used like velero) -> in some cases this is useful when etch cluster is not available
+2) ETCD cluster => create snapshots of the etcd cluster
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k get node
+kubectl get all all namespaces o yaml all deploy services.yaml
 
+export ETCDCTL_API=3 
+
+ETCDCTL_API=3 etcdctl \
+  snapshot save snapshot.db
+
+ls
+
+ETCDCTL_API=3 etcdctl \
+  snapshot status snapshot.db
+
+service kube apiserver stop
+
+ETCDCTL_API=3 etcdctl \
+  snapshot restore snapshot.db
+  --data dir /var/lib/etcd from backup
+  --initial cluster master-1=https://192.168.5.11:2380,master-2=https://192.168.5.12:2380
+  --initial cluster token etcd cluster 1 \
+  --initial advertise peer urls https://${INTERNAL_IP}:2380
+
+service kube apiserver start
+systemctl daemon reload
+service etcd restart
+
+
+kubectl logs etcd-controlplane -n kube-system
+kubectl -n kube-system logs etcd-controlplane | grep -i 'etcd-version'
+kubectl -n kube-system describe pod etcd-controlplane | grep Image:
+kubectl -n kube-system describe pod etcd-controlplane | grep '\--listen-client-urls'
+
+ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 \
+--cacert=/etc/kubernetes/pki/etcd/ca.crt \
+--cert=/etc/kubernetes/pki/etcd/server.crt \
+--key=/etc/kubernetes/pki/etcd/server.key \
+snapshot save /opt/snapshot-pre-boot.db
+
+ETCDCTL_API=3 etcdctl  --data-dir /var/lib/etcd-from-backup \
+snapshot restore /opt/snapshot-pre-boot.db
+
+vim /etc/kubernetes/manifests/etcd.yaml
+
+volumes:
+  - hostPath:
+      path: /var/lib/etcd-from-backup
+      type: DirectoryOrCreate
+    name: etcd-data
 ```
 
 </p>
@@ -158,13 +205,59 @@ k get node
 
 ### Backup and Restore Method 2
 
-tct
+
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+kubectl config use-context cluster1
+
+kubectl get pods -n kube-system  | grep etcd
+
+ls /etc/kubernetes/manifests/ | grep -i etcd
+
+ps -ef | grep etcd
+kubectl -n kube-system describe pod kube-apiserver-cluster2-controlplane | grep etcd
+
+kubectl config use-context cluster1
+ kubectl describe  pods -n kube-system etcd-cluster1-controlplane  | grep advertise-client-urls
+kubectl describe  pods -n kube-system etcd-cluster1-controlplane  | grep pki
+ETCDCTL_API=3 etcdctl --endpoints=https://10.1.220.8:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key snapshot save /opt/cluster1.db
+Snapshot saved at /opt/cluster1.db
+
+scp cluster1-controlplane:/opt/cluster1.db /opt
+```
+
+<details><summary>restore etcd</summary>
+<p>
+  
+```bash
+scp /opt/cluster2.db etcd-server:/root
+etcd-server ~ ➜  ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/etcd/pki/ca.pem --cert=/etc/etcd/pki/etcd.pem --key=/etc/etcd/pki/etcd-key.pem snapshot restore /root/cluster2.db --data-dir /var/lib/etcd-data-new
+
+vi /etc/systemd/system/etcd.service
+
+[Unit]
+Description=etcd key-value store
+Documentation=https://github.com/etcd-io/etcd
+After=network.target
+
+[Service]
+User=etcd
+Type=notify
+ExecStart=/usr/local/bin/etcd \
+  --name etcd-server \
+  --data-dir=/var/lib/etcd-data-new \
+---End of Snippet---
+
+
+etcd-server /var/lib ➜  chown -R etcd:etcd /var/lib/etcd-data-new
+
+etcd-server /var/lib ➜  ls -ld /var/lib/etcd-data-new/
+
+etcd-server ~/default.etcd ➜  systemctl daemon-reload 
+etcd-server ~ ➜  systemctl restart etcd
 ```
 
 </p>
