@@ -43,13 +43,26 @@ k cordon node01
 
 ### Cluster Upgrade
 
-tct
+Only latest 3 versions are supported and should upgrade version by version instaed of jumping to latest versin.
+With other cloud providers just one click upgrade but with kubeadm you can run some commands to upgrade.
+
+Master node gets upgraded first and then worker nodes. For worker nodes there are 3 strategies
+
+1st Strategy: all workder nodes update at the same time (downtime)
+2nd Strategy: one node at a time 
+3rd Strategy: Create upgrade nodes and move workload to new nodes (Convenient to do in cloud)
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+kubeadm upgrade plan
+apt-get upgrade -y kubeadm=1.12.0 00
+kubeadm upgrade apply v1.12.0
+kubectl get nodes
+apt-get upgrade -y kubelet=1.12.0 00
+systemctl restart kubelet
+
 ```
 
 </p>
