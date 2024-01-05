@@ -89,7 +89,12 @@ tct
 <p>
   
 ```bash
-k logs webapp-1
+kubectl config --kubeconfig=/root/my-kube-config current-context
+kubectl config --kubeconfig=/root/my-kube-config use-context research
+
+cd /etc/kubernetes/pki/users
+k config view
+vim $HOME/.kube/config
 ```
 
 </p>
