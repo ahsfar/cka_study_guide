@@ -33,6 +33,13 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
 kubectl logs etcd-master
 docker ps -a
 docker logs 87fc
+
+cat /etc/kubernetes/manifests/etcd.yaml
+ls -l /etc/kubernetes/pki/etcd/server* | grep .crt
+vim /etc/kubernetes/manifests/etcd.yaml
+
+crictl ps -a | grep kube-apiserver
+crictl logs --tail=2 a11b49d7257ab
 ```
 
 </p>
@@ -40,13 +47,35 @@ docker logs 87fc
 
 ### Certificates API
 
-tct
+Controller manager helps approving and signing csr for creating new users.
+
+These can be viewed and approved by admin.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+cat akshay.csr | base64 -w 0
+
+---
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: akshay
+spec:
+  groups:
+  - system:authenticated
+  request: <Paste the base64 encoded value of the CSR file>
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+  - client auth
+
+kubectl apply -f akshay-csr.yaml
+k get csr
+k certificate approve akshay
+kubectl get csr agent-smith -o yaml
+k certificate deny agent-smith
+k delete csr agent-smith
 ```
 
 </p>
