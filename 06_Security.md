@@ -8,6 +8,7 @@ TLS Certificates for secure communication in cluster.
 Auth:
 - Users
 - Service Accounts
+
 Mechanism: Static Password File, Static Token File, Certificates, LDAP
 
 Symmetric vs Asymmetric encryption
