@@ -83,7 +83,7 @@ k delete csr agent-smith
 
 ### KubeConfig
 
-tct
+It's yaml file stored at &HOME/.kube/config which is used to keep cert files with cluster, context and users. So, you don't have to provide certs with commands.
 
 <details><summary>show</summary>
 <p>
