@@ -244,13 +244,18 @@ kubectl set serviceaccount deploy/web-dashboard dashboard-sa
 
 ### Image Security
 
-tct
+Images are saved locally or in a repository. Repository can be public or private.
+For private repo create a secret with private repo and user info.
+And mention that secert in the pod-def.yaml file to pull repo from private repo.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+docker login private-registry.io
+docker run private-registry.io/apps/internal-app
+
+k create secret docker-registry private-reg-cred --docker-username=docker_user --docker-password=docker_password --docker-server=myprivateregistry.com:5000 --docker-email=dock_user@myprivateregistry.com
 ```
 
 </p>
