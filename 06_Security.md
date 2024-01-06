@@ -102,7 +102,16 @@ vim $HOME/.kube/config
 
 ### Role Based Access Control
 
-tct
+Before we talk about RBAC we need to talk about:
+
+#### API Groups:
+-> named /apis -> API Group (/storage, /networking, /certificates, etc) -> resources (/deplayments, etc ) -> verb (list, get, update, etc)
+
+#### Authorization:
+Node:
+ABAC:
+RBAC:
+Webhook:
 
 <details><summary>show</summary>
 <p>
