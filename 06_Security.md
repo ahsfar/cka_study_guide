@@ -263,13 +263,68 @@ k create secret docker-registry private-reg-cred --docker-username=docker_user -
 
 ### Security Contexts
 
-tct
+Like docker you can give capabilities or priveleges to container/pod.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+kubectl exec ubuntu-sleeper -- whoami
+
+kubectl delete pod ubuntu-sleeper --force
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-sleeper
+  namespace: default
+spec:
+  securityContext:
+    runAsUser: 1010
+  containers:
+  - command:
+    - sleep
+    - "4800"
+    image: ubuntu
+    name: ubuntu-sleeper
+
+kubectl apply -f <file-name>.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-pod
+spec:
+  securityContext:
+    runAsUser: 1001
+  containers:
+  -  image: ubuntu
+     name: web
+     command: ["sleep", "5000"]
+     securityContext:
+      runAsUser: 1002
+
+  -  image: ubuntu
+     name: sidecar
+     command: ["sleep", "5000"]
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-sleeper
+  namespace: default
+spec:
+  containers:
+  - command:
+    - sleep
+    - "4800"
+    image: ubuntu
+    name: ubuntu-sleeper
+    securityContext:
+      capabilities:
+        add: ["SYS_TIME", "NET_ADMIN"]
 ```
 
 </p>
@@ -277,15 +332,64 @@ k logs webapp-1
 
 ### Network Poicies
 
-tct
+Ingress which is inbound traffic
+Egress which is outbound traffic
+You can control the traffic flow in pod by creating network policies by defualt all the traffic is allowed within the cluster.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+kubectl get netpol
+kubectl get po --show-labels | grep name=payroll
+
+kubectl get svc -n kube-system
 ```
 
 </p>
 </details>
 
+<details><summary>show</summary>
+<p>
+  
+```bash
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: internal-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      name: internal
+  policyTypes:
+  - Egress
+  - Ingress
+  ingress:
+    - {}
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          name: mysql
+    ports:
+    - protocol: TCP
+      port: 3306
+
+  - to:
+    - podSelector:
+        matchLabels:
+          name: payroll
+    ports:
+    - protocol: TCP
+      port: 8080
+
+  - ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
+```
+
+</p>
+</details>
