@@ -11,13 +11,66 @@ In Kubernetes you can create volumes on host or external and mount them to your 
 
 ### Persistant Volumes & Persistant Volumes Claim
 
-tct
+PV is cluster wide storage and you can perform PVC to use (bind) the PV created.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+kubectl exec webapp -- cat /log/app.log
+
+kubectl delete po webapp
+k run webappp --image=kodekloud/event-simulator --dry-run=client -o yaml > webappp.yaml
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: webapp
+  name: webapp
+spec:
+  containers:
+  - image: kodekloud/event-simulator
+    name: webapp
+    resources: {}
+    volumeMount: /log
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+volume:
+  hostPath: /var/log/webapp
+
+=> PV:
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-log
+spec:
+  persistentVolumeReclaimPolicy: Retain
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 100Mi
+  hostPath:
+    path: /pv/log
+
+=> PVC:
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: claim-log-1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+
+
+k get persistentvolume
+k get persistentvolumeclaims
 ```
 
 </p>
@@ -25,7 +78,8 @@ k logs webapp-1
 
 ### Storage Class
 
-txt
+Dynamic provisioning: storage is created in external storage like gcp, etc.
+
 <details><summary>show</summary>
 <p>
   
