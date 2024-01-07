@@ -79,12 +79,54 @@ k get persistentvolumeclaims
 ### Storage Class
 
 Dynamic provisioning: storage is created in external storage like gcp, etc.
+Replace the PV with SC bcz SC contains PV in it. Classes (Silver, Gold, Platinum)
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-pvc
+spec:
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+
+kubectl run nginx --image=nginx:alpine --dry-run=client -oyaml > nginx.yaml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:alpine
+    volumeMounts:
+      - name: local-persistent-storage
+        mountPath: /var/www/html
+  volumes:
+    - name: local-persistent-storage
+      persistentVolumeClaim:
+        claimName: local-pvc
+
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: delayed-volume-sc
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+
+
 ```
 
 </p>
