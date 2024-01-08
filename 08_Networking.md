@@ -1,5 +1,7 @@
 # Networking
 
+Prerequistice topics: Switching & Routing, DNS, Network namespaces, Docker Networking, CNI, Cluster Networking.
+
 ### Kubernetes Env
 
 tct
