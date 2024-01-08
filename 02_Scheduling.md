@@ -9,16 +9,6 @@
 <p>
   
 ```bash
-cmds
-```
-
-</p>
-</details>
-
-<details><summary>show</summary>
-<p>
-  
-```bash
 ---
 apiVersion: v1
 kind: Pod
