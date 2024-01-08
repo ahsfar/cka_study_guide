@@ -3,7 +3,20 @@
 
 ### Docker vs Container D
 
-Containerd is the actual container running in docker.
+#### Docker:
+
+Docker is a comprehensive container platform that includes various components and tools.
+It provides a high-level API and command-line interface (CLI) for container management.
+Docker includes features like container orchestration (Docker Swarm and Kubernetes integration), networking, storage management, and image distribution.
+It is designed to be user-friendly and offers a complete solution for building, running, and managing containers.
+Docker uses its own container runtime, which is responsible for creating and executing containers.
+#### containerd:
+
+containerd is a lightweight, open-source container runtime developed by Docker and later donated to the Cloud Native Computing Foundation (CNCF).
+It focuses specifically on container execution and management, providing a minimalistic and modular approach.
+containerd is designed to be more low-level and is primarily used as a container runtime by other container platforms and orchestration systems.
+It follows the OCI (Open Container Initiative) specifications, ensuring compatibility and interoperability with other OCI-compliant tools.
+containerd is highly extensible and can be integrated with higher-level container management platforms like Kubernetes or Docker.
 
 ### ETCD
 
