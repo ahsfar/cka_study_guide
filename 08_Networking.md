@@ -201,13 +201,29 @@ k logs kube-proxy-4t62z -n kube-system
 
 ### Explore DNS in Kubernetes
 
-tct
+Kube DNS is auto created on a cluster and it maps hostnames with their ips. So, you can just reach that host by their hostname if in the same namespace.
+
+For across namespace you can mention hostname.namespace for reaching the host in that namespace.
+
+hostname.namespace.type.root
+
+web-service.apps.svc.cluster.local
+hostname.default.pod.cluster.local
+
+
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+kubectl get pods -n kube-system
+
+kubectl get cm -n kube-system
+
+kubectl get svc
+
+kubectl exec -it hr -- nslookup mysql.payroll > /root/CKA/nslookup.out
+
 ```
 
 </p>
