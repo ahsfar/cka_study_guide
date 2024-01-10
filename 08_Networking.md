@@ -137,13 +137,13 @@ cat /etc/cni/net.d/10-flannel.conflist | grep type
 
 ### Deploy Network Solution
 
-tct
+Check documentaion for deploying a CNI plugin. 
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+k apply -f file_name.yaml
 ```
 
 </p>
@@ -173,20 +173,33 @@ ip route
 
 ### Service Networking 
 
-tct
+Services are cluster wide. 
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+ip a | grep eth0
+
+apt install ipcalc
+
+ipcalc -b <ip_addr>
+
+k logs weave-net-fgxvr weave -n kube-system | grep ipalloc-range
+
+cat /etc/kubernetes/manifests/kube-apiserver.yaml   | grep cluster-ip-range
+
+k get pods -n kube-system
+
+k logs kube-proxy-4t62z -n kube-system
+
 ```
 
 </p>
 </details>
 
 
-### Explore DNS
+### Explore DNS in Kubernetes
 
 tct
 
