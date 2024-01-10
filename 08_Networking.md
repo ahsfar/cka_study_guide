@@ -92,13 +92,24 @@ ip link set veth-blue-br up
 
 ### Kubernetes Env
 
-tct
+Explore the kubernetes environment to get the networking details.  
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+k get nodes
+k describe node controlplane  | grep -i internal
+
+ip a / ip link
+ssh node01
+ip link show eth0
+
+netstat -nplt
+
+netstat -anp | grep etcd
+netstat -anp | grep etcd | grep 2379 | wc -l
+
 ```
 
 </p>
