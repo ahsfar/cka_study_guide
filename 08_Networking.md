@@ -117,13 +117,18 @@ netstat -anp | grep etcd | grep 2379 | wc -l
 
 ### CNI
 
-tct
+Container Networking Interface is a networking standard. It helps you deploy an agent on each node where it keeps all the networking info of the pods in the nodes and all the nodes in the cluster. 
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+ps -aux | grep kubelet | grep --color container-runtime-endpoint
+
+/opt/cni/bin  # available CNI pluggins
+
+cat /etc/cni/net.d/10-flannel.conflist | grep type
+
 ```
 
 </p>
