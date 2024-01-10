@@ -151,13 +151,20 @@ k logs webapp-1
 
 ### Networking Weave
 
-tct
+Weave installs agent on all the nodes for networking in a cluster in kubernetes.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs webapp-1
+kubectl get pods -n kube-system
+
+kubectl get po -o wide -n kube-system | grep weave
+
+ip addr show weave
+
+ssh node01
+ip route
 ```
 
 </p>
