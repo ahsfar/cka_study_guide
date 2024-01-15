@@ -281,7 +281,32 @@ kubectl exec -it hr -- nslookup mysql.payroll > /root/CKA/nslookup.out
 <p>
   
 ```bash
-k logs webapp-1
+# Create an Ingress Resource
+kubectl create ingress <ingress-name> --rule=<host>/<path>=<service-name>:<service-port>
+
+# View Ingress Details
+kubectl get ingress <ingress-name> -o yaml
+
+# Describe Ingress
+kubectl describe ingress <ingress-name>
+
+# Edit Ingress
+kubectl edit ingress <ingress-name>
+
+# Delete Ingress
+kubectl delete ingress <ingress-name>
+
+# Check Ingress Controller Logs
+kubectl logs -l <ingress-controller-label> -n <ingress-controller-namespace>
+
+# Testing Ingress with Curl
+curl -H "Host: <ingress-host>" http://<ingress-ip-or-host>/<path>
+
+# Checking Ingress Controller Version (for NGINX Ingress)
+kubectl exec -it <nginx-ingress-controller-pod> -- /nginx-ingress-controller --version
+
+# List All Ingress Resources
+kubectl get ingress --all-namespaces
 ```
 
 </p>
