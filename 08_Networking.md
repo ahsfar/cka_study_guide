@@ -232,44 +232,50 @@ kubectl exec -it hr -- nslookup mysql.payroll > /root/CKA/nslookup.out
 
 ### Ingress
 
-=> Ingress Basics:
+ #### Ingress Basics:
 
 - Ingress defines external access to services within a cluster.
 - It allows you to route external HTTP/S traffic to internal services.
 
-=> Creating Ingress:
+#### Creating Ingress:
 
 - Use kubectl create ingress to create an Ingress resource.
 - Specify backend services and rules in the Ingress definition.
 
-=> Host-Based Routing:
+#### Host-Based Routing:
 
-Achieve host-based routing with the host field in rules.
-Example: host: example.com.
-Path-Based Routing:
+- Achieve host-based routing with the host field in rules.
+- Example: host: example.com.
 
-Use the path field in rules for path-based routing.
-Example: path: /app.
-TLS Termination:
+#### Path-Based Routing:
 
-Secure traffic with TLS by specifying secrets in the Ingress.
-Define TLS hosts and paths for encryption.
-Annotations:
+- Use the path field in rules for path-based routing.
+- Example: path: /app.
 
-Customize Ingress behavior using annotations.
-Example: nginx.ingress.kubernetes.io/rewrite-target: /.
-Default Backend:
+#### TLS Termination:
 
-Define a default backend for requests that don’t match defined rules.
-Ensures unmatched traffic has a destination.
-Namespace Isolation:
+- Secure traffic with TLS by specifying secrets in the Ingress.
+- Define TLS hosts and paths for encryption.
 
-Ingress can be namespace-isolated for better organization.
-Specify the namespace in the Ingress definition.
-Testing Ingress:
+#### Annotations:
 
-Validate Ingress settings with kubectl describe ingress.
-Use tools like curl to test external access.
+- Customize Ingress behavior using annotations.
+- Example: nginx.ingress.kubernetes.io/rewrite-target: /.
+
+#### Default Backend:
+
+- Define a default backend for requests that don’t match defined rules.
+- Ensures unmatched traffic has a destination.
+
+#### Namespace Isolation:
+
+- Ingress can be namespace-isolated for better organization.
+- Specify the namespace in the Ingress definition.
+
+#### Testing Ingress:
+
+- Validate Ingress settings with kubectl describe ingress.
+- Use tools like curl to test external access.
 
 <details><summary>show</summary>
 <p>
