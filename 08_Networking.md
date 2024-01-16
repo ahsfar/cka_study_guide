@@ -338,9 +338,17 @@ kubectl create ingress test-ingress --namespace=critical-space \
 <p>
   
 ```bash
-kubectl create namespace ingress-nginx
+k create namespace ingress-nginx
+
+k create configmap ingress-nginx-controller --n ingress-nginx
+
+k create sa ingress-nginx --n ingress-nginx
+k create sa ingress-nginx-application --n ingress-nginx
+
+# created roles, roleBindings, cluserRole, clusterRoleBinding for sa (service accounts)
 
 
+ 
 ```
 
 </p>
