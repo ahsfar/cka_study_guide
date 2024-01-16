@@ -1,15 +1,17 @@
 # Design and Install Kubernetes Cluster
 
-### Topic
+On Prem: openshift, vagrant, etc
 
-Info
+Cloud: GKE, eks, aks, openshift cloud, etc
 
-<details><summary>show</summary>
-<p>
-  
-```bash
-k logs webapp-1
-```
+### HA 
 
-</p>
-</details>
+2 Master Node 
+
+3 ETCD node in cluster
+
+etcd can be separate as well if in master node then 3 master note min. 
+
+and odd number is preferred for etcd cluster.
+
+
