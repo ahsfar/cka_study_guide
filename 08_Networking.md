@@ -291,7 +291,7 @@ kubectl get ingress <ingress-name> -o yaml
 kubectl describe ingress <ingress-name>
 
 # Edit Ingress
-kubectl edit ingress <ingress-name>
+kubectl edit ingress <ingress-name> -n <namespae-name>
 
 # Delete Ingress
 kubectl delete ingress <ingress-name>
@@ -313,3 +313,26 @@ kubectl get ingress --all-namespaces
 </details>
 
 
+
+<details><summary>Ingress 1</summary>
+<p>
+  
+```bash
+kubectl edit ingress --namespace app-space
+
+```
+
+</p>
+</details>
+
+
+
+<details><summary>Ingress 2</summary>
+<p>
+  
+```bash
+#ingress 2 cmds
+```
+
+</p>
+</details>
