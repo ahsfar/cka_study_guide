@@ -338,7 +338,9 @@ kubectl create ingress test-ingress --namespace=critical-space \
 <p>
   
 ```bash
-#ingress 2 cmds
+kubectl create namespace ingress-nginx
+
+
 ```
 
 </p>
