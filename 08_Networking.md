@@ -315,7 +315,7 @@ kubectl get ingress --all-namespaces
 
 
 
-<details><summary>Ingress 1</summary>
+<details><summary>Ingress view</summary>
 <p>
   
 ```bash
@@ -334,7 +334,7 @@ kubectl create ingress test-ingress --namespace=critical-space \
 
 
 
-<details><summary>Ingress 2</summary>
+<details><summary>Ingress Installation</summary>
 <p>
   
 ```bash
@@ -347,7 +347,10 @@ k create sa ingress-nginx-application --n ingress-nginx
 
 # created roles, roleBindings, cluserRole, clusterRoleBinding for sa (service accounts)
 
+# show lines
+cat -n ingress-controller.yaml
 
+k create -f ingress-controller.yaml -n ingress-nginx 
  
 ```
 
