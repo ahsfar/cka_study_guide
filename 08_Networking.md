@@ -144,6 +144,12 @@ Check documentaion for deploying a CNI plugin.
   
 ```bash
 k apply -f file_name.yaml
+kubectl get svc -n critical-space
+
+kubectl create ingress test-ingress --namespace=critical-space \
+  --annotation=nginx.ingress.kubernetes.io/rewrite-target=/ \
+  --annotation=nginx.ingress.kubernetes.io/ssl-redirect="false" \
+  --rule="/pay=pay-service:8282" --dry-run=client -o yaml >> pay_ingress.yaml
 ```
 
 </p>
