@@ -6,9 +6,9 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-ku
 <p>
   
 ```bash
-- Create VM's for master and workder nodes.
+# Create VM's for master and workder nodes.
 
-- set net.bridge.bridge-nf-call-iptables to 1:
+set net.bridge.bridge-nf-call-iptables to 1
 
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 br_netfilter
@@ -20,8 +20,8 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 
 sudo sysctl --system
-- Install container runtime if not installed.
-- Install kubeadm, kubectl and kubelet on all nodes
+# Install container runtime if not installed.
+# Install kubeadm, kubectl and kubelet on all nodes
 
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
