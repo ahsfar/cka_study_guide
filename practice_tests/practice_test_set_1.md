@@ -6,12 +6,13 @@
 <p>
   
 ```bash
----
+
 # Update image imperativce way 
 k get deployment -o wide
 k set image deployment <image_name>=<image_name>:1.1.19
 
 ---
+
 # Update the static pod path (static pod is pod which creates itself after deletion)
 ps -aux | grep kubelet
 # look for --config=/var/lib/kubelet/config.yaml
@@ -19,6 +20,7 @@ ps -aux | grep kubelet
 -> change staticPodPath: etc/kubernetes/manifest
 
 ---
+
 # Upgrade the cluster (kubeadm;kubelet;kubectl)
 # Step 1
 k drain <node_name>
@@ -40,6 +42,7 @@ systemctl restart kubelet
 kubectl uncordon <node_name>
 
 ---
+
 # Create deployment with 5 replicas
 k create deployment <deployment_name> --image=<image>:x.x-alpine
 k scale deployment <deployment_name> --replicas=5
@@ -49,6 +52,7 @@ k create deployment <deployment_name> --image=<image>:x.x-alpine --replicas=5
 k describe deployment <deployment_name>
 
 ---
+
 # Create a pod with labels
 
 
