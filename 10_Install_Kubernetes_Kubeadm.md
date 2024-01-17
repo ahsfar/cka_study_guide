@@ -41,6 +41,18 @@ sudo apt-cache madison kubeadm
 sudo apt-get install -y kubelet=1.27.0-2.1 kubeadm=1.27.0-2.1 kubectl=1.27.0-2.1
 
 sudo apt-mark hold kubelet kubeadm kubectl
+
+# in master node
+
+ifconfig eth0
+
+kubeadm init --apiserver-cert-extra-sans=controlplane --apiserver-advertise-address 192.23.108.8 --pod-network-cidr=10.244.0.0/16
+
+# create token to let nodes join controlplane
+
+# In worker node
+kubeadm join 192.23.108.8:6443 --token thubfg.xxx
+
 ```
 
 </p>
