@@ -10,8 +10,12 @@
 k get deployment -o wide
 k set image deployment <image_name>=<image_name>:1.1.19
 
-#info
-cmd
+#update the static pod path (static pod is pod which creates itself after deletion)
+ps -aux | grep kubelet
+# look for --config=/var/lib/kubelet/config.yaml
+=> vim above_file.yaml
+=> change staticPodPath: etc/kubernetes/manifest
+
 
 
 
