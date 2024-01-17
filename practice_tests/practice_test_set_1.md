@@ -14,7 +14,7 @@ k set image deployment <image_name>=<image_name>:1.1.19
 ps -aux | grep kubelet
 # look for --config=/var/lib/kubelet/config.yaml
 => vim above_file.yaml
-=> change staticPodPath: etc/kubernetes/manifest
+-> change staticPodPath: etc/kubernetes/manifest
 
 
 
