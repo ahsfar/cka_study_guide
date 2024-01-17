@@ -54,8 +54,12 @@ k describe deployment <deployment_name>
 ---
 
 # Create a pod with labels
+k run <pod_name> --image=redis:alpine -l tier=redis
+k describe pod <pod_name>
 
+---
 
+#
 
 ```
 
