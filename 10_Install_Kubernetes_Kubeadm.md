@@ -1,6 +1,7 @@
 # Install Kubernetes Kubeadm way
 
-https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+[Kubeadm installation official documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
+
 
 <details><summary>show</summary>
 <p>
