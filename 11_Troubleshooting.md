@@ -8,6 +8,9 @@ Info
 <p>
   
 ```bash
+k get pods
+k describe pod -A
+k edit pod -n <namespace.name>
 k logs webapp-1
 ```
 
