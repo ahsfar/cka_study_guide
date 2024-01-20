@@ -2,7 +2,7 @@
 
 ### Application Failure
 
-Info
+Run the below commands and check details of the files to find out the root cause of the application failure.
 
 <details><summary>show</summary>
 <p>
@@ -29,6 +29,45 @@ kubectl get deployments
 
 </p>
 </details>
+
+<details><summary>show</summary>
+<p>
+  
+```bash
+k get pods -n alpha
+k describe pods -n alpha
+k get svc -n alpha
+k get svc mysql -n alpha
+k describe svc mysql -n alpha
+k -n alpha delete svc mysql
+vim mysql-service.yaml
+k create -f mysql-service.yaml 
+k get pods -n beta 
+k get svc -n beta
+k describe pods -n beta
+k describe svc -n beta 
+k edit svc mysql-service -n beta
+k get pods -n gamma 
+k describe  pods -n gamma 
+k get svc -n gamma 
+k describe svc -n gamma 
+k -n gamma describe svc mysql-service | grep -i selector
+k -n gamma describe pod mysql | grep -i label   
+k -n gamma edit svc mysql-service 
+k get pods -n delta
+k get svc -n delta
+k describe svc -n delta
+k describe  pods -n delta
+k edit deployments.apps 
+k edit deployments.apps -n delta
+k delete pod mysql -n epsilon
+k create -f /tmp/kubectl-edit-4270549182.yaml -n epsilon
+
+```
+
+</p>
+</details>
+
 
 
 ### Controlplane Failure
