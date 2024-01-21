@@ -82,7 +82,7 @@ k rollout history deployment my-deploy
 
 ---
 
-#
+# Creating a pod with a command
 
 
 ---
