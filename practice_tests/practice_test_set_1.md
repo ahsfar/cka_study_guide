@@ -82,8 +82,23 @@ k rollout history deployment my-deploy
 
 ---
 
-# Creating a pod with a command
-
+# Creating a static pod
+ps -aux | grep kubelet
+# look for --config**config.yaml
+k get nodes
+ssh my-node
+cat pathname/config.yaml
+# look for staticPodPath: /etc/kubernetes/manifet
+exit
+k run my-pod --image=my-img --command sleep 1000 --dry-run=client -o yaml > static.yaml
+k get nodes -o wide
+# get ip
+sudo scp static.yaml 102.x.x.x:/root/
+ssh my-node
+sudo -i
+cp /root/static.yaml /etc/kubernetes/manifests
+exit
+k get pods
 
 ---
 
