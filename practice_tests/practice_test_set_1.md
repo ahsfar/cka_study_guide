@@ -1,4 +1,4 @@
-# Practice Test Set 1 
+# Practice/Challenge Test Set 1 
 
 ### Practice the following commands.
 
@@ -99,6 +99,27 @@ sudo -i
 cp /root/static.yaml /etc/kubernetes/manifests
 exit
 k get pods
+
+---
+
+#
+
+
+```
+
+</p>
+</details>
+
+# Practice/Challenge Test Set 2 
+
+### Practice the following commands.
+
+<details><summary>show</summary>
+<p>
+  
+```bash
+
+# 
 
 ---
 
