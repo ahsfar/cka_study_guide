@@ -65,7 +65,34 @@ k run <pod_name> --image=<img_name>:alpine -n <ns_name>
 
 ---
 
-# 
+# Create pod and expose port
+k run my-pod --image=nginx
+k expose pod my-pod --name=my-service --port=8080 --target-port=8080
+
+---
+
+#
+
+
+---
+
+#
+
+
+---
+
+#
+
+
+---
+
+#
+
+
+---
+
+#
+
 
 
 ```
