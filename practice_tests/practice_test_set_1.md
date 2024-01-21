@@ -71,8 +71,14 @@ k expose pod my-pod --name=my-service --port=8080 --target-port=8080
 
 ---
 
-#
-
+# Rolling updates of deployment
+k create deployment my-deploy --image=my-img:1.15 --replicas=5 --dry-run-client -o yaml > deploy.yaml
+k create -f deploy.yaml
+k get deployments -o wide
+k describe deployment my-deploy
+k set image deployment/my-deploy my-image=my-image:1.16 --record
+k get deployments -o wide
+k rollout history deployment my-deploy 
 
 ---
 
