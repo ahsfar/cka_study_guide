@@ -59,7 +59,14 @@ k describe pod <pod_name>
 
 ---
 
-#
+# Create pod in namespace
+k create namesapce <namepsace_name>
+k run <pod_name> --image=<img_name>:alpine -n <ns_name>
+
+---
+
+# 
+
 
 ```
 
