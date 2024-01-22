@@ -102,7 +102,19 @@ k get pods
 
 ---
 
-#
+# Taint a node
+k get nodes
+k taint node my-node key=value:NoSchedule
+k describe node my-node | grep -i taitns
+k run my-pod --image=my-image:alpine
+k describe pod my-pod
+k run new-pod --image=my-img:alpine --dry-run=client -o yaml > tolerant_pod.yaml
+# add below in yaml file under spec:
+tolerations:
+- key:
+  effect: NoSchedule
+  operator: Equal
+  value:
 
 
 ```
