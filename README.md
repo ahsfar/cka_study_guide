@@ -18,4 +18,4 @@ For information about the exam, please refer [Certified Kubernetes Administrator
 
 # News
 
-CKA achieved on or after 1st April 2024 will be valid for 2 years only. 
+Policy change: CKA achieved on or after 1st April 2024 will be valid for 2 years only. 
