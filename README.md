@@ -16,3 +16,6 @@ It's important to mention that you have access to [Kubernetes Official Documenta
 For information about the exam, please refer [Certified Kubernetes Administrator (CKA) Program](https://www.cncf.io/certification/cka/).
 
 
+# News
+
+CKA if exam taken passed before 1st April 2024 will be valid for 3 years but after 1st April it will only be valid for 2 years.
