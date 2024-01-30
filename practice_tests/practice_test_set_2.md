@@ -66,8 +66,73 @@ k get pods -o wide
 
 ---
 
-#
+# New user with acces on cluster in a specific namesapce
+# always check the documentation if you're not sure
+# you're allowed to use the official kubernetes documentation for the exam
+# will need to create certificates for new user
+openssl genrsa -out newuser_name.key 2048
+openssl req key -new -key newuser_name.key -out newuser_name.csr
+vim csr.yaml
+# enter below yaml config got from official documentation 
+# https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: newuser_name
+spec:
+  request: LS0t.....xxxx.....=
+  signerName: kubernetes.io/kube-apiserver-client
+  expirationSeconds: 86400  # one day
+  usages:
+  - client auth
 
+cat newuser_name.csr | base64 | tr -d "\n"
+# copy the output and replace withe the request value in the above yaml
+k create -f csr.yaml
+k get csr
+# should show pending
+k certificate approve newuser_name 
+k get csr 
+# should show approved 
+# get the config for role binding from official doc
+# https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+vim new-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: namesapce_name
+  name: pod-reader
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get", "create", "list", "update", "delete"]
+
+# create role binding as per official doc
+vim rolebinding-new.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+# This role binding allows "newuser_name " to read pods in the "default" namespace.
+# You need to already have a Role named "pod-reader" in that namespace.
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: namesapce_name
+subjects:
+# You can specify more than one "subject"
+- kind: User
+  name: newuser_name  # "name" is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  # "roleRef" specifies the binding to a Role / ClusterRole
+  kind: Role #this must be Role or ClusterRole
+  name: pod-reader # this must match the name of the Role or ClusterRole you wish to bind to
+  apiGroup: rbac.authorization.k8s.io
+
+k apply -f new-role.yaml
+k get role -n namespace_name
+k create -f rolebinding-new.yaml
+k get rolebinding -n namespace_name
+# verify
+k auth can-i delete pods -n namesapce_name --as newuser_name
 
 ---
 
