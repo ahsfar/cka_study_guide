@@ -43,10 +43,14 @@ spec:
         - protocol: TCP
             port: 80
 
+k create -f network-policy.yaml
+k describe networkpolicy net-policy
+
 ---
 
-#
-
+# Internal IP of all nodes in cluster
+k get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}' > filename.txt
+cat filename.txt
 
 ---
 
