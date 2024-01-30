@@ -70,6 +70,12 @@ k get pods -o wide
 # always check the documentation if you're not sure
 # you're allowed to use the official kubernetes documentation for the exam
 # will need to create certificates for new user
+# 1. create key (cmd)
+# 2. create csr (yamla and apply)
+# 3. approve csr (cmd)
+# 4. create role (yaml and apply)
+# 5. create rolebiinding (yaml and apply)
+# 6. verify if as a new user you can perform the configured actions or not using auth (cmd)
 openssl genrsa -out newuser_name.key 2048
 openssl req key -new -key newuser_name.key -out newuser_name.csr
 vim csr.yaml
