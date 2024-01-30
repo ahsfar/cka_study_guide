@@ -1,4 +1,4 @@
-# Practice/Challenge Test Set 1 
+# Practice/Challenge Test Set 1
 
 ### Practice the following commands.
 
@@ -7,119 +7,166 @@
   
 ```bash
 
-# Update image imperativce way 
-k get deployment -o wide
-k set image deployment <image_name>=<image_name>:1.1.19
+# Create a new service account, clusterrole and clusterrolebinding and pod 
+k create serviceaccount newserviceaccount
+k create clusterrole newclusterrole --resource=persistentvolume --verb=list
+k create clusterrolebinding crbname --clusterrole=newclusterrole --serviceaccount=default:newserviceaccount
+k run pod-name --image=img-name --dry-run=client -o yaml > pod.yaml
+vim pod.yaml
+# under spec:
+#    serviceAccountName: newserviceaccount
+k create -f pod.yaml
+k describe pod pod-name
+# verify serviceaccount exists
 
 ---
 
-# Update the static pod path (static pod is pod which creates itself after deletion)
-ps -aux | grep kubelet
-# look for --config=/var/lib/kubelet/config.yaml
--> vim above_file.yaml
--> change staticPodPath: etc/kubernetes/manifest
+# Create a network policy to allow communication on a single port for all pods in a specific namespace
+k create namesapce ns-name label app=website 
+vim network-policy.yaml
+# enter below yaml configuration
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy 
+metadata:
+    name: net-policy 
+    namespace: website
+spec:
+    podSelector: (} 
+    policyTypes:
+    - Ingress 
+    ingress:
+    - from:
+        - namespaceSelector: 
+            matchLabels:
+                app: website
+        ports:
+        - protocol: TCP
+            port: 80
+
+k create -f network-policy.yaml
+k describe networkpolicy net-policy
 
 ---
 
-# Upgrade the cluster (kubeadm;kubelet;kubectl)
-# Step 1
-k drain <node_name>
-# Step 2
-k uncordon <node_name>
-# Step 3
-apt update
-# Step 4
-apt install kubeadm=1.1.19.0-00
-# Step 5
-kubeadm upgrade apply v1.19.0
-# Step 6
-apt install kubelet=1.1.19.0-00
-# Step 7
-apt install kubectl=1.1.19.0-00
-# Step 8
-systemctl restart kubelet
-# Step 9
-kubectl uncordon <node_name>
+# Internal IP of all nodes in cluster
+k get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}' > filename.txt
+cat filename.txt
 
 ---
 
-# Create deployment with 5 replicas
-k create deployment <deployment_name> --image=<image>:x.x-alpine
-k scale deployment <deployment_name> --replicas=5
-# above in 1 command
-k create deployment <deployment_name> --image=<image>:x.x-alpine --replicas=5
+# Multicontainer pod with a command 
+# in multicontainer pod normally we share data like usign sidecar containers
+k run pod-name --image=img-name --command sleep 100 --dry-run=client -o yaml > multipod.yaml
+vim multipod.yaml
+# under conatiners:
+# - name: second-conatiner
+#   image: new-image
+k create -f multipod.yaml
+k get pods -o wide
+
+---
+
+# New user with acces on cluster in a specific namesapce
+# always check the documentation if you're not sure
+# you're allowed to use the official kubernetes documentation for the exam
+# will need to create certificates for new user
+# 1. create key (cmd)
+# 2. create csr (yaml and apply)
+# 3. approve csr (cmd)
+# 4. create role (yaml and apply)
+# 5. create rolebiinding (yaml and apply)
+# 6. verify if as a new user you can perform the configured actions or not using auth (cmd)
+openssl genrsa -out newuser_name.key 2048
+openssl req key -new -key newuser_name.key -out newuser_name.csr
+vim csr.yaml
+# enter below yaml config got from official documentation 
+# https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: newuser_name
+spec:
+  request: LS0t.....xxxx.....=
+  signerName: kubernetes.io/kube-apiserver-client
+  expirationSeconds: 86400  # one day
+  usages:
+  - client auth
+
+cat newuser_name.csr | base64 | tr -d "\n"
+# copy the output and replace withe the request value in the above yaml
+k create -f csr.yaml
+k get csr
+# should show pending
+k certificate approve newuser_name 
+k get csr 
+# should show approved 
+# get the config for role binding from official doc
+# https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+vim new-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: namesapce_name
+  name: pod-reader
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get", "create", "list", "update", "delete"]
+
+# create role binding as per official doc
+vim rolebinding-new.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+# This role binding allows "newuser_name " to read pods in the "default" namespace.
+# You need to already have a Role named "pod-reader" in that namespace.
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: namesapce_name
+subjects:
+# You can specify more than one "subject"
+- kind: User
+  name: newuser_name  # "name" is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  # "roleRef" specifies the binding to a Role / ClusterRole
+  kind: Role #this must be Role or ClusterRole
+  name: pod-reader # this must match the name of the Role or ClusterRole you wish to bind to
+  apiGroup: rbac.authorization.k8s.io
+
+k apply -f new-role.yaml
+k get role -n namespace_name
+k create -f rolebinding-new.yaml
+k get rolebinding -n namespace_name
 # verify
-k describe deployment <deployment_name>
+k auth can-i delete pods -n namesapce_name --as newuser_name
 
 ---
 
-# Create a pod with labels
-k run <pod_name> --image=redis:alpine -l tier=redis
-k describe pod <pod_name>
+#
+
 
 ---
 
-# Create pod in namespace
-k create namesapce <namepsace_name>
-k run <pod_name> --image=<img_name>:alpine -n <ns_name>
+#
+
 
 ---
 
-# Create pod and expose port
-k run my-pod --image=nginx
-k expose pod my-pod --name=my-service --port=8080 --target-port=8080
+#
+
 
 ---
 
-# Rolling updates of deployment
-k create deployment my-deploy --image=my-img:1.15 --replicas=5 --dry-run-client -o yaml > deploy.yaml
-k create -f deploy.yaml
-k get deployments -o wide
-k describe deployment my-deploy
-k set image deployment/my-deploy my-image=my-image:1.16 --record
-k get deployments -o wide
-k rollout history deployment my-deploy 
+#
+
 
 ---
 
-# Creating a static pod
-ps -aux | grep kubelet
-# look for --config**config.yaml
-k get nodes
-ssh my-node
-cat pathname/config.yaml
-# look for staticPodPath: /etc/kubernetes/manifet
-exit
-k run my-pod --image=my-img --command sleep 1000 --dry-run=client -o yaml > static.yaml
-k get nodes -o wide
-# get ip
-sudo scp static.yaml 102.x.x.x:/root/
-ssh my-node
-sudo -i
-cp /root/static.yaml /etc/kubernetes/manifests
-exit
-k get pods
+#
 
----
-
-# Taint a node
-k get nodes
-k taint node my-node key=value:NoSchedule
-k describe node my-node | grep -i taitns
-k run my-pod --image=my-image:alpine
-k describe pod my-pod
-k run new-pod --image=my-img:alpine --dry-run=client -o yaml > tolerant_pod.yaml
-# add below in yaml file under spec:
-tolerations:
-- key:
-  effect: NoSchedule
-  operator: Equal
-  value:
 
 
 ```
 
 </p>
 </details>
-
-
