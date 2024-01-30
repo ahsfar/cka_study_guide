@@ -54,8 +54,15 @@ cat filename.txt
 
 ---
 
-#
-
+# Multicontainer pod with a command 
+# in multicontainer pod normally we share data like usign sidecar containers
+k run pod-name --image=img-name --command sleep 100 --dry-run=client -o yaml > multipod.yaml
+vim multipod.yaml
+# under conatiners:
+# - name: second-conatiner
+#   image: new-image
+k create -f multipod.yaml
+k get pods -o wide
 
 ---
 
