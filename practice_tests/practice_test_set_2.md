@@ -21,6 +21,55 @@ k describe pod pod-name
 
 ---
 
+# Create a network policy to allow communication on a single port for all pods in a specific namespace
+k create namesapce ns-name label app=website 
+vim network-policy.yaml
+# enter below yaml configuration
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy 
+metadata:
+    name: net-policy 
+    namespace: website
+spec:
+    podSelector: (} 
+    policyTypes:
+    - Ingress 
+    ingress:
+    - from:
+        - namespaceSelector: 
+            matchLabels:
+                app: website
+        ports:
+        - protocol: TCP
+            port: 80
+
+---
+
+#
+
+
+---
+
+#
+
+
+---
+
+#
+
+
+---
+
+#
+
+
+---
+
+#
+
+
+---
+
 #
 
 
