@@ -168,12 +168,12 @@ k describe pod my-pod
 
 ---
 
-#
-
+# List all pv sort by storage 
+k get pv --sort-by=spec.capacity.storage
 
 ---
 
-#
+# 
 
 
 ---
