@@ -151,8 +151,20 @@ cat text.txt
 
 ---
 
-#
+# Creating and mounting a secret to the pod
+# ConfigMaps are also used for securing text but secrets more secure way to keep a text secret
+k create secert generic pod-secret-name --from-literal=password=pswd1234
+# open the pod yaml file and mount the seceret under conatiner VolumeMounts: options:
+VolumeMounts:
+- mountPath: "/secret"
+  name: pod-secret-name
+# and under voluems as well
+volumes:
+- name: pod-secret-name
+  secret:
+    secretName: pod-secret-name
 
+k describe pod my-pod
 
 ---
 
