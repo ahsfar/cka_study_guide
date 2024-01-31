@@ -173,8 +173,8 @@ k get pv --sort-by=spec.capacity.storage
 
 ---
 
-# 
-
+# Find pods running high CPU
+k top pod --sort-by cpu -l environment=env-name | head -2
 
 ---
 
