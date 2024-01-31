@@ -48,8 +48,8 @@ k describe deployment dep-name | grep Image
 
 ---
 
-#
-
+# Pods with lable
+k get pods -l env=me > pods_me.txt
 
 ---
 
