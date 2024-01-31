@@ -35,6 +35,15 @@ spec:
 
 ---
 
+# Overwrite lable
+k label pod/pod-name env=new-label --overwrite
+
+---
+
+#
+
+---
+
 #
 
 
@@ -42,6 +51,23 @@ spec:
 
 #
 
+---
+
+#
+
+
+---
+
+#
+
+---
+
+#
+
+
+---
+
+#
 
 
 ```
