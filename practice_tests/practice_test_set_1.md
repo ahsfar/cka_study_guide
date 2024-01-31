@@ -178,9 +178,8 @@ k top pod --sort-by cpu -l environment=env-name | head -2
 
 ---
 
-#
-
-
+# Use json path to get all the nodes names
+k get nodes -o jsonpath='{.items[*].metadata.name}' > node_names.txt 
 
 ```
 
