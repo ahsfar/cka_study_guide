@@ -40,7 +40,11 @@ k label pod/pod-name env=new-label --overwrite
 
 ---
 
-#
+# Upgrade the image in deployment
+k describe deployment dep-name | grep Image
+k set image deployment dep-name image=newimage:1.28 --record
+k rollout undo deployment dep-name 
+k describe deployment dep-name | grep Image
 
 ---
 
