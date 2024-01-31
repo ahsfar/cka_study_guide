@@ -7,7 +7,7 @@
   
 ```bash
 
-# Update image imperativce way 
+# Update image imperative way 
 k get deployment -o wide
 k set image deployment <image_name>=<image_name>:1.1.19
 
@@ -16,7 +16,7 @@ k set image deployment <image_name>=<image_name>:1.1.19
 # Update the static pod path (static pod is pod which creates itself after deletion)
 ps -aux | grep kubelet
 # look for --config=/var/lib/kubelet/config.yaml
--> vim above_file.yaml
+vim config.yaml # above file
 -> change staticPodPath: etc/kubernetes/manifest
 
 ---

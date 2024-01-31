@@ -142,8 +142,12 @@ k auth can-i delete pods -n namesapce_name --as newuser_name
 
 ---
 
-#
-
+# Create a service from the pod and running DNS lookup to check the service
+k expose pod my-pod --name=my-pod-service-name --port=80 
+k run nslookup --image=image-name:1.28 --command sleep 3600
+k exec -it nslookup --nslookup my-pod-service-name
+k exec -it nslookup --nslookup my-pod-service-name > text.txt
+cat text.txt
 
 ---
 
