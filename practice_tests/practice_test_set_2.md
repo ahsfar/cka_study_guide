@@ -8,7 +8,8 @@
   
 ```bash
 
-# 
+# Check container logs
+k logs pod-name -c container-name -n ns-name > file.log
 
 ---
 
