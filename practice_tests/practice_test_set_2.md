@@ -106,7 +106,24 @@ kubectl taint nodes node1 key:NoSchedule-
 
 ---
 
-#
+# ETCD backup and restore 
+export ETCDCTL_API=3
+
+export ETCDCTL_CACERT="/path/to/ca.crt"
+export ETCDCTL_CERT="/path/to/etcd.crt"
+export ETCDCTL_KEY="/path/to/etcd.key"
+
+etcdctl snapshot save /path/to/snapshot.db
+# restore snapshot
+sudo systemctl stop etcd
+
+etcdctl snapshot restore /path/to/snapshot.db --data-dir /path/to/new/data-dir
+
+sudo systemctl daemon-reload
+sudo systemctl start etcd
+
+etcdctl member list
+etcdctl endpoint health
 
 
 ---
