@@ -107,6 +107,13 @@ kubectl taint nodes node1 key:NoSchedule-
 ---
 
 # ETCD backup and restore 
+# https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=<trusted-ca-file> --cert=<cert-file> --key=<key-file> \
+  snapshot save <backup-file-location>
+
+ETCDCTL_API=3 etcdctl --data-dir <data-dir-location> snapshot restore snapshot.db
+
 export ETCDCTL_API=3
 
 export ETCDCTL_CACERT="/path/to/ca.crt"
@@ -127,7 +134,7 @@ etcdctl endpoint health
 
 ---
 
-#
+# 
 
 
 ```
