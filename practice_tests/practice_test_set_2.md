@@ -65,9 +65,39 @@ k get pod pod-name -o wide
 
 ---
 
-#
+# PVC for pod
+vim pvc.yaml
 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 
+# then pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    image: nginx
+    volumeMounts:
+    - mountPath: "/usr/share/nginx/html"
+      name: my-volume
+  volumes:
+  - name: my-volume
+    persistentVolumeClaim:
+      claimName: my-pvc
+
+# This is dynamic provisionong -> K8 will create pv dynamically for pvc if doesn't exist.
+k get pvc # and it should show bound
 ---
 
 #
