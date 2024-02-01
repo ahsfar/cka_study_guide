@@ -125,7 +125,6 @@ sudo systemctl start etcd
 etcdctl member list
 etcdctl endpoint health
 
-
 ---
 
 #
