@@ -53,7 +53,15 @@ k get pods -l env=me > pods_me.txt
 
 ---
 
-#
+# Pod on specific node
+k lable nodes node-name env=prod
+k run pod-name --image=img-name --dry-run=client -o yaml > new-pod.yaml
+vim new-pod.yaml
+# under spec:
+    nodeSelector: 
+        env: prod
+
+k get pod pod-name -o wide 
 
 ---
 
