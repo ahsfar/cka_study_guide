@@ -17,4 +17,3 @@ echo "Ready nodes: $ready"
 echo "NotReady nodes: $notReady"
 
 
-# Also run this to make the script executable => chmod +x check_nodes.sh

@@ -111,11 +111,10 @@ k describe pod my-pod
 k run new-pod --image=my-img:alpine --dry-run=client -o yaml > tolerant_pod.yaml
 # add below in yaml file under spec:
 tolerations:
-- key:
-  effect: NoSchedule
-  operator: Equal
-  value:
-
+- key: "key"
+  effect: "NoSchedule"
+  operator: "Equal"
+  value: "value"
 
 ```
 

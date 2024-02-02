@@ -36,4 +36,3 @@ etcdctl member list
 etcdctl endpoint health
 
 
-# give the execution rights to run the scirpt => chmod +x etcd-backup-restore.sh

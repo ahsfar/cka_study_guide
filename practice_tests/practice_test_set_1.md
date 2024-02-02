@@ -66,6 +66,7 @@ k get pods -o wide
 
 ---
 
+################################
 # New user with acces on cluster in a specific namesapce
 # always check the documentation if you're not sure
 # you're allowed to use the official kubernetes documentation for the exam
@@ -142,11 +143,12 @@ k auth can-i delete pods -n namesapce_name --as newuser_name
 
 ---
 
+################################
 # Create a service from the pod and running DNS lookup to check the service
 k expose pod my-pod --name=my-pod-service-name --port=80 
 k run nslookup --image=image-name:1.28 --command sleep 3600
-k exec -it nslookup --nslookup my-pod-service-name
-k exec -it nslookup --nslookup my-pod-service-name > text.txt
+k exec -it nslookup -- nslookup my-pod-service-name
+k exec -it nslookup -- nslookup my-pod-service-name > text.txt
 cat text.txt
 
 ---
@@ -169,7 +171,7 @@ k describe pod my-pod
 ---
 
 # List all pv sort by storage 
-k get pv --sort-by=spec.capacity.storage
+k get pv --sort-by=.spec.capacity.storage
 
 ---
 

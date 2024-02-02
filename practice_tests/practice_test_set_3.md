@@ -26,7 +26,25 @@ k exec -it env-demo-pod -- sh -c 'echo $DEMO_ENV_VAR'
 
 ---
 
+# Adding configmap to pod
+
+
+---
+
 #
+
+---
+
+#
+
+---
+
+#
+
+---
+
+#
+
 
 
 
