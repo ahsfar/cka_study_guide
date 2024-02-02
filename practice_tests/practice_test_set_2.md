@@ -134,7 +134,23 @@ etcdctl endpoint health
 
 ---
 
-# 
+# Pod tolerant on a node
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tolerant-pod
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+  tolerations:
+  - key: key
+    operator: Equal
+    value: value
+    effect: NoSchedule
+
+k apply -f tolerant-pod.yaml
 
 
 ```
