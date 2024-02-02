@@ -8,7 +8,8 @@
   
 ```bash
 
-# 
+# Deployment autoscale
+k auto-scale deployment dep-name --min=3 --max=6 --cpu-percent=80
 
 ---
 
