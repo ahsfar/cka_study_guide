@@ -18,8 +18,11 @@ k descibe nodes | grep ready | wc -l > text.txt
 
 ---
 
-#
-
+# create pod with environment variable
+k run env-demo-pod --image=nginx --env="DEMO_ENV_VAR=Hello, World!"
+# verify 
+k exec env-demo-pod -- printenv DEMO_ENV_VAR
+k exec -it env-demo-pod -- sh -c 'echo $DEMO_ENV_VAR'
 
 ---
 
