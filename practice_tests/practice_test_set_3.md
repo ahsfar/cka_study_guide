@@ -87,15 +87,17 @@ k get nodes
 
 ---
 
-# temp pod delete after creation 
-kubectl run temp-pod --image=busybox --restart=Never --rm -it -- /bin/sh -c 'echo "something"'
+# Temp pod delete after creation 
+k run temp-pod --image=nginx --restart=Never --rm -it -- /bin/sh -c 'echo "something"'
 
 ---
 
-#
-
-
-
+# Annotate a pod 
+# Annotations are a powerful feature for adding contextual information to your Kubernetes objects, 
+# enhancing both the manageability and the operational visibility of your applications in Kubernetes.
+k annotate pod my-app-pod git-commit="123abc"
+k annotate pod my-app-pod git-commit="456def" pipeline-id="pipeline-789" deployment-timestamp="2024-02-01T15:04:05Z"
+k describe pod my-app-pod | grep -i annotations 
 
 ```
 
