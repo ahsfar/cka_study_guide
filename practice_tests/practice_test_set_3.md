@@ -87,9 +87,8 @@ k get nodes
 
 ---
 
-#
-
-
+# temp pod delete after creation 
+kubectl run temp-pod --image=busybox --restart=Never --rm -it -- /bin/sh -c 'echo "something"'
 
 ---
 
