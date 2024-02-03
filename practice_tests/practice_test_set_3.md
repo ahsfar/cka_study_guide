@@ -27,11 +27,18 @@ k exec -it env-demo-pod -- sh -c 'echo $DEMO_ENV_VAR'
 ---
 
 # Adding configmap to pod
+k create configmap cm-name --from-literal=user=jane --from-literal=password=abcd1234
+k get pod pod-name --dry-run=client -o yaml > pod-name.yaml
+# input below under conatiner in spec section
+ envFrom:
+ - configMapRef:
+    name: cm-name
 
+k exec -it pod-name -- env
 
 ---
 
-#
+
 
 ---
 
