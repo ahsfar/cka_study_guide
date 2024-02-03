@@ -38,7 +38,8 @@ k exec -it pod-name -- env
 
 ---
 
-
+# Results by timestamp
+k get events --sort-by=.metadata.creationTimestamp > events.log
 
 ---
 
