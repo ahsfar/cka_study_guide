@@ -43,7 +43,28 @@ k get events --sort-by=.metadata.creationTimestamp > events.log
 
 ---
 
-#
+# Non-pv pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-pod
+spec:
+  containers:
+  - name: first-container
+    image: nginx
+    volumeMounts:
+    - mountPath: /cache
+      name: cache-volume
+  - name: second-container
+    image: alpine
+    volumeMounts:
+    - mountPath: /cache
+      name: cache-volume
+  volumes:
+  - name: cache-volume
+    emptyDir: {}
+
+kubectl apply -f example-pod.yaml
 
 ---
 
