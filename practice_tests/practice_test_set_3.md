@@ -68,12 +68,28 @@ kubectl apply -f example-pod.yaml
 
 ---
 
-#  pod troubleshooting 
+#  pod troubleshooting - kubelet
 sudo systemctl status kubelet
 sudo systemctl start kubelet
 sudo systemctl restart kubelet
 # kubelet service errors
 journalctl -u kubelet
+
+---
+
+# Preparing for node upgrade
+k get pods -o wide
+k get nodes
+k cordon node1
+k drain node1 --ignore-daemonsets --force
+k get pods -o wide
+k get nodes
+
+---
+
+#
+
+
 
 ---
 
