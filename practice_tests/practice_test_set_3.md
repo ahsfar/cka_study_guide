@@ -68,7 +68,12 @@ kubectl apply -f example-pod.yaml
 
 ---
 
-#
+#  pod troubleshooting 
+sudo systemctl status kubelet
+sudo systemctl start kubelet
+sudo systemctl restart kubelet
+# kubelet service errors
+journalctl -u kubelet
 
 ---
 
