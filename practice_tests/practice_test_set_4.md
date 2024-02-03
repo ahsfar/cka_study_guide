@@ -8,7 +8,8 @@
   
 ```bash
 
-# 
+# List all pods in all namespaces
+k get pods -A > pods.txt
 
 ---
 
