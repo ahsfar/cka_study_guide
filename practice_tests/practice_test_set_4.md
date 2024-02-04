@@ -178,9 +178,8 @@ kubectl get jobs
 
 ---
 
-#
-
-
+# pods name and namespace using jsonpath
+k get pods -A -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.namespace}{"\n"}{end}'
 
 ```
 
