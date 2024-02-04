@@ -83,7 +83,23 @@ spec:
 
 ---
 
-#
+# Create clusterrole and clusterrolebindings
+
+kubectl create clusterrole pod-reader --verb=get,list,watch --resource=pods
+kubectl create clusterrolebinding pod-reader-binding --clusterrole=pod-reader --serviceaccount=default:default
+
+
+kubectl create serviceaccount monitoring-sa --namespace monitoring
+kubectl create clusterrolebinding monitoring-pod-reader-binding --clusterrole=pod-reader --serviceaccount=monitoring:monitoring-sa
+
+# Verify
+kubectl auth can-i <verb> <resource> [--namespace <namespace>] [--as <username|serviceaccount>]
+
+kubectl auth can-i create pods
+kubectl auth can-i list deployments --namespace my-namespace --as system:serviceaccount:my-namespace:my-service-account
+kubectl auth can-i delete nodes --as system:serviceaccount:default:default
+
+kubectl auth can-i list pods --all-namespaces --as system:serviceaccount:monitoring:monitoring-sa
 
 
 ---
