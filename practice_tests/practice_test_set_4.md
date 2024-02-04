@@ -143,8 +143,38 @@ kubectl exec -it my-mongodb-statefulset-0 -n my-namespace -- df -h
 ---
 
 
-# 
+# cronjob for backups and report generation
+# Example: Database Backup CronJob
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: database-backup
+spec:
+  schedule: "0 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: db-backup
+            image: mydbbackup:latest
+            env:
+            - name: DB_HOST
+              value: "mydatabase.host"
+            - name: DB_USER
+              value: "backupuser"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-user-pass
+                  key: password
+            command: ["/bin/sh", "-c", "/path/to/backup/script.sh"]
+          restartPolicy: OnFailure
 
+kubectl apply -f db-backup-cronjob.yaml
+kubectl get cronjobs
+kubectl describe cronjob database-backup
+kubectl get jobs
 
 ---
 
