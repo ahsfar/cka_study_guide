@@ -24,8 +24,14 @@ k exec -it pod-name -- env
 
 ---
 
-#
-
+# Troubleshooting pod unable to schedule on node
+k get pod pod-name -o wide
+k describe pod pod-name
+k get pod pod-name -o yaml > newpod.yaml
+vim newpod.yaml
+# fix the mistakes yaml 
+k replace --force -f newpod.yaml
+k describe pod pod-name | grep Labels
 
 ---
 
