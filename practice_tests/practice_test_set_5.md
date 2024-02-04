@@ -58,14 +58,22 @@ spec:
       periodSeconds: 20
 
 kubectl apply -f webapp-liveness.yaml
-kubectl describe pod webapp
+kubectl describe pod webapp | grep -i liveness 
 
 # by default restartpolicy is Always if not specified it will restart if liveness probe health check fails
 
 ---
 
-#
+# Deployment rollback
 
+kubectl rollout history deployment/my-web-app
+
+kubectl rollout history deployment/my-web-app --revision=2
+
+kubectl rollout undo deployment/my-web-app --to-revision=1
+
+kubectl get deployment my-web-app
+kubectl describe deployment my-web-app
 
 ---
 
