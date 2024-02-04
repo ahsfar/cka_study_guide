@@ -35,7 +35,36 @@ k describe pod pod-name | grep Labels
 
 ---
 
-#
+# network policy to allow traffic from a pod to other pods
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: policy-name
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: allow-outbound
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels: 
+          name: department1
+    ports:
+    - protocol: TCP
+      port: 80
+  - to:
+    - podSelector:
+        matchLabels: 
+          name: department2
+    ports:
+    - protocol: TCP
+      port: 8080
+
+                    
 
 
 
