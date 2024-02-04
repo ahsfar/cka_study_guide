@@ -35,7 +35,7 @@ k describe pod pod-name | grep Labels
 
 ---
 
-# network policy to allow traffic from a pod to other pods
+# Network policy to allow traffic from a pod to other pods
 
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -64,8 +64,37 @@ spec:
     - protocol: TCP
       port: 8080
 
-                    
+---
 
+# Set SYS_TIME for pod
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-context-demo-4
+spec:
+  containers:
+  - name: sec-ctx-4
+    image: gcr.io/google-samples/node-hello:1.0
+    command: [ "sh", "-c", "sleep 1h" ]
+    securityContext:
+      capabilities:
+        add: ["SYS_TIME"]
+
+---
+
+#
+
+
+---
+
+
+#
+
+
+---
+
+#
 
 
 ```
