@@ -77,7 +77,42 @@ kubectl describe deployment my-web-app
 
 ---
 
+# custom columns for pod info
+
+kubectl get pods -o custom-columns=NAME:.metadata.name,STATUS:.status.phase
+
+kubectl get pods -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,REASON:.status.containerStatuses[0].state.waiting.reason
+
+
+---
+
 #
+
+
+---
+
+#
+
+
+---
+
+#
+
+
+---
+
+#
+
+
+---
+
+#
+
+
+---
+
+#
+
 
 
 
