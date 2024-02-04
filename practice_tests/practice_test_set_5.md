@@ -38,8 +38,29 @@ kubectl apply -f backend-access-policy.yaml
 
 ---
 
-#
+# Liveness probe - Real-World Scenario: Web Server Health Check
 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+spec:
+  containers:
+  - name: web-server
+    image: my-web-server:latest
+    ports:
+    - containerPort: 8080
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 20
+
+kubectl apply -f webapp-liveness.yaml
+kubectl describe pod webapp
+
+# by default restartpolicy is Always if not specified it will restart if liveness probe health check fails
 
 ---
 
