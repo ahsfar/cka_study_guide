@@ -119,8 +119,22 @@ spec:
 
 ---
 
-#
+# Non-persistent storage (normally for logging)
 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pd
+spec:
+  containers:
+  - image: registry.k8s.io/test-webserver
+    name: test-container
+    volumeMounts:
+    - mountPath: /data/logs
+      name: logs-volume
+  volumes:
+  - name: logs-volume
+    emptyDir: {}
 
 ---
 
