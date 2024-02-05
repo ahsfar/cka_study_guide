@@ -9,8 +9,9 @@
 ```bash
 
 # Network Policy
-# Allow traffic from Pods in the frontend-ns namespace with a specific label (e.g., role: frontend) to Pods in the backend-ns namespace with a specific label (e.g., role: backend).
-# Allow traffic from any Pod within the backend-ns namespace to Pods in the same namespace with the role: backend label.
+# 1. Allow traffic from Pods in the frontend-ns namespace with a specific label (e.g., role: frontend) to Pods in the 
+# backend-ns namespace with a specific label (e.g., role: backend).
+# 2. Allow traffic from any Pod within the backend-ns namespace to Pods in the same namespace with the role: backend label.
 
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -77,7 +78,7 @@ kubectl describe deployment my-web-app
 
 ---
 
-# custom columns for pod info
+# Pod info using custom columns
 
 kubectl get pods -o custom-columns=NAME:.metadata.name,STATUS:.status.phase
 
@@ -86,8 +87,35 @@ kubectl get pods -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,REAS
 
 ---
 
-#
+# Setting resources -> requests and limits for pod
 
+https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+spec:
+  containers:
+  - name: app
+    image: images.my-company.example/app:v4
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+  - name: log-aggregator
+    image: images.my-company.example/log-aggregator:v6
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
 
 ---
 
