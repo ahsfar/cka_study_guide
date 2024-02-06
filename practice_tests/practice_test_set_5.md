@@ -138,7 +138,10 @@ spec:
 
 ---
 
-#
+# expose pod internally 
+
+k expose pod pod-name --name=service-name --port=80 --target-port=80 --type=ClusterIP
+k run test-pod --image=nginx:1.12 --rm -it --restart=Never -- nslookup service-name
 
 
 ---
