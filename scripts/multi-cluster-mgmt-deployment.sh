@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # Suppose you have three Kubernetes clusters for development, staging, and production 
-# Path to the kubeconfig file, ensuring it's securely handled
-KUBECONFIG_PATH="~/.kube/config"
+# # Path to the kubeconfig file, ensuring it's securely handled
+# KUBECONFIG_PATH="$HOME/.kube/config"
 
 # Path to the deployment file
 DEPLOYMENT_FILE="deployment.yaml"
 
-# Ensure the kubeconfig file exists and is readable
-if [[ ! -r "$KUBECONFIG_PATH" ]]; then
-    echo "Error: kubeconfig file not found or not readable."
-    exit 1
-fi
+# # Ensure the kubeconfig file exists and is readable
+# if [[ ! -r "$KUBECONFIG_PATH" ]]; then
+#     echo "Error: kubeconfig file not found or not readable."
+#     exit 1
+# fi
 
 # Ensure the deployment file exists and is readable
 if [[ ! -r "$DEPLOYMENT_FILE" ]]; then
