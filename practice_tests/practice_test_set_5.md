@@ -146,7 +146,11 @@ k run test-pod --image=nginx:1.12 --rm -it --restart=Never -- nslookup service-n
 
 ---
 
-#
+# DaemonSet (ensures all the nodes run a copy of the pod)(create a deployment and then edit yaml later)
+
+k create deployment test-daemon --image=img-name:alpine --dry-run=client -o yaml > test-daemon.yaml
+# change kind: DaemonSet
+# delete replica line
 
 
 ---
