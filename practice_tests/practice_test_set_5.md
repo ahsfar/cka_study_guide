@@ -155,7 +155,15 @@ k create deployment test-daemon --image=img-name:alpine --dry-run=client -o yaml
 
 ---
 
-#
+# Assigning a pod to a node
+
+k run pod-name --image=img-name --dry-run=client -o yaml > pod-name.yaml
+vim pod-name.yaml
+# under spec:
+ nodeName: node01
+
+k create -f pod-name.yaml
+k get pod pod-name -o wide
 
 
 ---
