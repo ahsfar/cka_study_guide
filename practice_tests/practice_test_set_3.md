@@ -8,15 +8,7 @@
   
 ```bash
 
-# Deployment autoscale
-k auto-scale deployment dep-name --min=3 --max=6 --cpu-percent=80
 
----
-
-# No. of nodes in ready status
-k descibe nodes | grep ready | wc -l > text.txt
-
----
 
 # create pod with environment variable
 k run env-demo-pod --image=nginx --env="DEMO_ENV_VAR=Hello, World!"

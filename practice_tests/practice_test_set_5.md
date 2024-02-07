@@ -63,27 +63,6 @@ kubectl describe pod webapp | grep -i liveness
 
 # by default restartpolicy is Always if not specified it will restart if liveness probe health check fails
 
----
-
-# Deployment rollback
-
-kubectl rollout history deployment/my-web-app
-
-kubectl rollout history deployment/my-web-app --revision=2
-
-kubectl rollout undo deployment/my-web-app --to-revision=1
-
-kubectl get deployment my-web-app
-kubectl describe deployment my-web-app
-
----
-
-# Pod info using custom columns
-
-kubectl get pods -o custom-columns=NAME:.metadata.name,STATUS:.status.phase
-
-kubectl get pods -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,REASON:.status.containerStatuses[0].state.waiting.reason
-
 
 ---
 
