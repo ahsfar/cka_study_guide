@@ -168,7 +168,14 @@ k get pod pod-name -o wide
 
 ---
 
-#
+# all contexts in a file
+
+kubectl config get-contexts -o name > kube_contexts.txt
+
+
+for context in $(cat kube_contexts.txt); do
+  kubectl --context="$context" apply -f deployment.yaml
+done
 
 
 
