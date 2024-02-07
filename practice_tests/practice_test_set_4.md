@@ -70,20 +70,20 @@ spec:
 
 # Create clusterrole and clusterrolebindings
 
-kubectl create clusterrole pod-reader --verb=get,list,watch --resource=pods
-kubectl create clusterrolebinding pod-reader-binding --clusterrole=pod-reader --serviceaccount=default:default
+k create clusterrole pod-reader --verb=get,list,watch --resource=pods
+k create clusterrolebinding pod-reader-binding --clusterrole=pod-reader --serviceaccount=default:default
 # Verify
-kubectl auth can-i <verb> <resource> [--namespace <namespace>] [--as <username|serviceaccount>]
+k auth can-i <verb> <resource> [--namespace <namespace>] [--as <username|serviceaccount>]
 
-kubectl auth can-i create pods
-kubectl auth can-i list deployments --namespace my-namespace --as system:serviceaccount:my-namespace:my-service-account
-kubectl auth can-i delete nodes --as system:serviceaccount:default:default
+k auth can-i create pods
+k auth can-i list deployments --namespace my-namespace --as system:serviceaccount:my-namespace:my-service-account
+k auth can-i delete nodes --as system:serviceaccount:default:default
 
 # real world example 
-kubectl create serviceaccount monitoring-sa --namespace monitoring
-kubectl create clusterrolebinding monitoring-pod-reader-binding --clusterrole=pod-reader --serviceaccount=monitoring:monitoring-sa
+k create serviceaccount monitoring-sa --namespace monitoring
+k create clusterrolebinding monitoring-pod-reader-binding --clusterrole=pod-reader --serviceaccount=monitoring:monitoring-sa
 # verify
-kubectl auth can-i list pods --all-namespaces --as system:serviceaccount:monitoring:monitoring-sa
+k auth can-i list pods --all-namespaces --as system:serviceaccount:monitoring:monitoring-sa
 
 
 ---
@@ -156,10 +156,10 @@ spec:
             command: ["/bin/sh", "-c", "/path/to/backup/script.sh"]
           restartPolicy: OnFailure
 
-kubectl apply -f db-backup-cronjob.yaml
-kubectl get cronjobs
-kubectl describe cronjob database-backup
-kubectl get jobs
+k apply -f db-backup-cronjob.yaml
+k get cronjobs
+k describe cronjob database-backup
+k get jobs
 
 ---
 

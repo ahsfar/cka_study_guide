@@ -34,7 +34,7 @@ spec:
             role: frontend
       - podSelector: {}
 
-kubectl apply -f backend-access-policy.yaml
+k apply -f backend-access-policy.yaml
 
 
 ---
@@ -149,7 +149,7 @@ k get pod pod-name -o wide
 
 # all contexts in a file
 
-kubectl config get-contexts -o name > kube_contexts.txt
+k config get-contexts -o name > kube_contexts.txt
 
 
 for context in $(cat kube_contexts.txt); do

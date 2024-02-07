@@ -101,8 +101,8 @@ k get pvc # and it should show bound
 ---
 
 # Untaint a node
-kubectl taint nodes <node-name> <taint-key>-
-kubectl taint nodes node1 key:NoSchedule-
+k taint nodes <node-name> <taint-key>-
+k taint nodes node1 key:NoSchedule-
 
 ---
 
