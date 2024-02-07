@@ -7,20 +7,6 @@
   
 ```bash
 
-# Update image imperative way 
-k get deployment -o wide
-k set image deployment <image_name>=<image_name>:1.1.19
-
----
-
-# Update the static pod path (static pod is pod which creates itself after deletion)
-ps -aux | grep kubelet
-# look for --config=/var/lib/kubelet/config.yaml
-vim config.yaml # above file
--> change staticPodPath: etc/kubernetes/manifest
-
----
-
 # Upgrade the cluster (kubeadm;kubelet;kubectl)
 # Step 1
 k drain <node_name>
@@ -51,23 +37,6 @@ k create deployment <deployment_name> --image=<image>:x.x-alpine --replicas=5
 # verify
 k describe deployment <deployment_name>
 
----
-
-# Create a pod with labels
-k run <pod_name> --image=redis:alpine -l tier=redis
-k describe pod <pod_name>
-
----
-
-# Create pod in namespace
-k create namesapce <namepsace_name>
-k run <pod_name> --image=<img_name>:alpine -n <ns_name>
-
----
-
-# Create pod and expose port
-k run my-pod --image=nginx
-k expose pod my-pod --name=my-service --port=8080 --target-port=8080
 
 ---
 
@@ -115,6 +84,12 @@ tolerations:
   effect: "NoSchedule"
   operator: "Equal"
   value: "value"
+
+  ---
+
+# Upgrading the k8 cluster
+
+# drain, cordon, install, upgarde, restart and uncordon on both control plane and worker nodes
 
 ```
 

@@ -59,15 +59,18 @@ spec:
 
 ---
 
-#
+# List all pv sort by storage 
+k get pv --sort-by=.spec.capacity.storage
 
 ---
 
-#
+# Find pods running high CPU
+k top pod --sort-by cpu -l environment=env-name | head -2
 
 ---
 
-#
+# Use json path to get all the nodes names
+k get nodes -o jsonpath='{.items[*].metadata.name}' > node_names.txt 
 
 
 
