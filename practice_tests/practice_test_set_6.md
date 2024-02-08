@@ -47,7 +47,12 @@ spec:
 
 ---
 
-#
+# replicaSets
+
+kubectl create replicaset my-replicaset --image=nginx --replicas=3 --dry-run=client -o yaml > my-replicaset.yaml
+
+# can't use the --replica flag using imperative so do -o yaml and then adjust the file and then apply changes
+kubectl apply -f my-replicaset.yaml
 
 ---
 
