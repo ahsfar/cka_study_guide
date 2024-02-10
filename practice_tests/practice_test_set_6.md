@@ -75,7 +75,59 @@ spec:
 
 ---
 
-#
+# 3 probes in kubernetes
+
+Startup Probe: "Has the application finished starting up?"
+Liveness Probe: "Is the application still running as expected?"
+Readiness Probe: "Is the application ready to do its job (e.g., handle requests)?"
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-app
+spec:
+  containers:
+  - name: web-server
+    image: web-app-image:latest
+    ports:
+    - containerPort: 8080
+    # Define resource requests and limits for better resource allocation
+    resources:
+      requests: # Minimum resources required
+        cpu: "100m" # Request 100 millicpu
+        memory: "200Mi" # Request 200 MiB of memory
+      limits: # Maximum resources allowed
+        cpu: "500m" # Limit to 500 millicpu
+        memory: "500Mi" # Limit to 500 MiB of memory
+    # Readiness probe to check if the container is ready to handle requests
+    readinessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      timeoutSeconds: 1
+      successThreshold: 1
+      failureThreshold: 3
+    # Liveness probe to check if the container is running properly
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 20
+      timeoutSeconds: 1
+      successThreshold: 1
+      failureThreshold: 3
+    # Startup probe to ensure the application has started correctly
+    startupProbe:
+      httpGet:
+        path: /start
+        port: 8080
+      initialDelaySeconds: 10
+      periodSeconds: 5
+      failureThreshold: 30
+
 
 ---
 
