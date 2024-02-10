@@ -27,7 +27,22 @@ vim config.yaml # above file
 
 ---
 
-#
+# Least privilege (run as non root user) and mounted volume necessary permissions (fsgroup)
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-webapp
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 2000
+  containers:
+  - name: webapp-container
+    image: nginx:latest
+    ports:
+    - containerPort: 8080
 
 
 
