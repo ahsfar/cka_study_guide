@@ -56,7 +56,22 @@ kubectl apply -f my-replicaset.yaml
 
 ---
 
-#
+# create a pod with security context for logging purpose giving permission to use ports without root user and giving net admin task privileges
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: log-manager
+spec:
+  containers:
+  - name: log-manager-container
+    image: log-manager-image:latest
+    securityContext:
+      capabilities:
+        add: ["CAP_NET_BIND_SERVICE", "CAP_NET_ADMIN"]
+    ports:
+    - containerPort: 80
+    - containerPort: 443
 
 ---
 
