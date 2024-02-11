@@ -16,7 +16,7 @@ k run env-demo-pod --image=nginx --env="DEMO_ENV_VAR=Hello, World!"
 k exec env-demo-pod -- printenv DEMO_ENV_VAR
 k exec -it env-demo-pod -- sh -c 'echo $DEMO_ENV_VAR'
 
----
+----
 
 # Adding configmap to pod
 k create configmap cm-name --from-literal=user=jane --from-literal=password=abcd1234
@@ -28,12 +28,12 @@ k get pod pod-name --dry-run=client -o yaml > pod-name.yaml
 
 k exec -it pod-name -- env
 
----
+----
 
 # Results by timestamp
 k get events --sort-by=.metadata.creationTimestamp > events.log
 
----
+----
 
 # Non-pv pod
 apiVersion: v1
@@ -58,7 +58,7 @@ spec:
 
 kubectl apply -f example-pod.yaml
 
----
+----
 
 #  pod troubleshooting - kubelet
 sudo systemctl status kubelet
@@ -67,7 +67,7 @@ sudo systemctl restart kubelet
 # kubelet service errors
 journalctl -u kubelet
 
----
+----
 
 # Preparing for node upgrade
 k get pods -o wide
@@ -77,12 +77,12 @@ k drain node1 --ignore-daemonsets --force
 k get pods -o wide
 k get nodes
 
----
+----
 
 # Temp pod delete after creation 
 k run temp-pod --image=nginx --restart=Never --rm -it -- /bin/sh -c 'echo "something"'
 
----
+----
 
 # Annotate a pod 
 # Annotations are a powerful feature for adding contextual information to your Kubernetes objects, 

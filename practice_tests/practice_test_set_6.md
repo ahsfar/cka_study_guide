@@ -13,14 +13,14 @@
 kubectl get events --field-selector reason=Killing -o custom-columns=NAME:.involvedObject.name | awk '!/NAME/{print $1}' | sort -u > recently_deleted_pods.txt
 
 
----
+----
 
 # delete pod without delay
 
 K delete pod pod-name --grace-period=0 --force
 
 
----
+----
 
 # expose deployment
 
@@ -29,7 +29,7 @@ k get svc
 k describe svc deploy-service-name
 
 
----
+----
 
 # Default deny
 https://kubernetes.io/docs/concepts/services-networking/network-policies/
@@ -45,7 +45,7 @@ spec:
   policyTypes:
   - Ingress
 
----
+----
 
 # replicaSets
 
@@ -73,7 +73,7 @@ spec:
     - containerPort: 80
     - containerPort: 443
 
----
+----
 
 # 3 probes in kubernetes
 
@@ -129,17 +129,17 @@ spec:
       failureThreshold: 30
 
 
----
+----
 
 # List all pv sort by storage 
 k get pv --sort-by=.spec.capacity.storage
 
----
+----
 
 # Find pods running high CPU
 k top pod --sort-by cpu -l environment=env-name | head -2
 
----
+----
 
 # Use json path to get all the nodes names
 k get nodes -o jsonpath='{.items[*].metadata.name}' > node_names.txt 

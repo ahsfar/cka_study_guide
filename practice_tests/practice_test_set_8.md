@@ -12,7 +12,7 @@
 k get deployment -o wide
 k set image deployment <image_name>=<image_name>:1.1.19
 
----
+----
 
 
 # Deployment rollback
@@ -26,7 +26,7 @@ k rollout undo deployment/my-web-app --to-revision=1
 k get deployment my-web-app
 k describe deployment my-web-app
 
----
+----
 
 # Pod info using custom columns
 
@@ -36,12 +36,12 @@ k get pods -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,REASON:.st
 
 
 
----
+----
 
 #
 
 
----
+----
 
 #
 

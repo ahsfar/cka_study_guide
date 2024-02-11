@@ -11,23 +11,21 @@
 # Step 1
 k drain <node_name>
 # Step 2
-k uncordon <node_name>
-# Step 3
 apt update
-# Step 4
+# Step 3
 apt install kubeadm=1.1.19.0-00
-# Step 5
+# Step 4
 kubeadm upgrade apply v1.19.0
-# Step 6
+# Step 5
 apt install kubelet=1.1.19.0-00
-# Step 7
+# Step 6
 apt install kubectl=1.1.19.0-00
-# Step 8
+# Step 7
 systemctl restart kubelet
-# Step 9
+# Step 8
 kubectl uncordon <node_name>
 
----
+----
 
 # Create deployment with 5 replicas
 k create deployment <deployment_name> --image=<image>:x.x-alpine
@@ -38,7 +36,7 @@ k create deployment <deployment_name> --image=<image>:x.x-alpine --replicas=5
 k describe deployment <deployment_name>
 
 
----
+----
 
 # Rolling updates of deployment
 k create deployment my-deploy --image=my-img:1.15 --replicas=5 --dry-run-client -o yaml > deploy.yaml
@@ -49,7 +47,7 @@ k set image deployment/my-deploy my-image=my-image:1.16 --record
 k get deployments -o wide
 k rollout history deployment my-deploy 
 
----
+----
 
 # Creating a static pod
 ps -aux | grep kubelet
@@ -69,7 +67,7 @@ cp /root/static.yaml /etc/kubernetes/manifests
 exit
 k get pods
 
----
+----
 
 # Taint a node
 k get nodes
@@ -85,18 +83,13 @@ tolerations:
   operator: "Equal"
   value: "value"
 
-  ---
 
-# Upgrading the k8 cluster
-
-# drain, cordon, install, upgarde, restart and uncordon on both control plane and worker nodes
-
----
+----
 
 # List all pods in all namespaces
 k get pods -A > pods.txt
 
----
+----
 
 # Update configmap 
 k get configmap cm-name
@@ -107,7 +100,7 @@ k replace -f configmap.yaml
 k get pod pod-name -o yaml | k replace --force -f -
 k exec -it pod-name -- env
 
----
+
 
 
 ```

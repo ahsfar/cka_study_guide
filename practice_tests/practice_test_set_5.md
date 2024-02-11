@@ -37,7 +37,7 @@ spec:
 k apply -f backend-access-policy.yaml
 
 
----
+----
 
 # Liveness probe - Real-World Scenario: Web Server Health Check
 
@@ -64,7 +64,7 @@ kubectl describe pod webapp | grep -i liveness
 # by default restartpolicy is Always if not specified it will restart if liveness probe health check fails
 
 
----
+----
 
 # Setting resources -> requests and limits for pod
 
@@ -96,7 +96,7 @@ spec:
         memory: "128Mi"
         cpu: "500m"
 
----
+----
 
 # Non-persistent storage (normally for logging)
 
@@ -115,7 +115,7 @@ spec:
   - name: logs-volume
     emptyDir: {}
 
----
+----
 
 # expose pod internally 
 
@@ -123,7 +123,7 @@ k expose pod pod-name --name=service-name --port=80 --target-port=80 --type=Clus
 k run test-pod --image=nginx:1.12 --rm -it --restart=Never -- nslookup service-name
 
 
----
+----
 
 # DaemonSet (ensures all the nodes run a copy of the pod)(create a deployment and then edit yaml later)
 
@@ -132,7 +132,7 @@ k create deployment test-daemon --image=img-name:alpine --dry-run=client -o yaml
 # delete replica line
 
 
----
+----
 
 # Assigning a pod to a node
 
@@ -145,7 +145,7 @@ k create -f pod-name.yaml
 k get pod pod-name -o wide
 
 
----
+----
 
 # all contexts in a file
 

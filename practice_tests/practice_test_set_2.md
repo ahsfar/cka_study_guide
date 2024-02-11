@@ -11,7 +11,7 @@
 # Check container logs
 k logs pod-name -c container-name -n ns-name > file.log
 
----
+----
 
 # Basic Ingress file 
 vim ingress.yaml
@@ -33,12 +33,12 @@ spec:
             port:
               number: 8080
 
----
+----
 
 # Overwrite lable
 k label pod/pod-name env=new-label --overwrite
 
----
+----
 
 # Upgrade the image in deployment
 k describe deployment dep-name | grep Image
@@ -46,12 +46,12 @@ k set image deployment dep-name image=newimage:1.28 --record
 k rollout undo deployment dep-name 
 k describe deployment dep-name | grep Image
 
----
+----
 
 # Pods with lable
 k get pods -l env=me > pods_me.txt
 
----
+----
 
 # Pod on specific node
 k lable nodes node-name env=prod
@@ -63,7 +63,7 @@ vim new-pod.yaml
 
 k get pod pod-name -o wide 
 
----
+----
 
 # PVC for pod
 vim pvc.yaml
@@ -98,13 +98,13 @@ spec:
 
 # This is dynamic provisionong -> K8 will create pv dynamically for pvc if doesn't exist.
 k get pvc # and it should show bound
----
+----
 
 # Untaint a node
 k taint nodes <node-name> <taint-key>-
 k taint nodes node1 key:NoSchedule-
 
----
+----
 
 # ETCD backup and restore 
 # https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/
@@ -120,7 +120,7 @@ etcdctl snapshot restore /path/to/snapshot.db --data-dir /path/to/new/data-dir
 sudo systemctl daemon-reload
 sudo systemctl start etcd
 
----
+----
 
 # Pod tolerant on a node
 

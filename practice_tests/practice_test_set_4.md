@@ -18,7 +18,7 @@ vim newpod.yaml
 k replace --force -f newpod.yaml
 k describe pod pod-name | grep Labels
 
----
+----
 
 # Network policy to allow traffic from a pod to other pods
 
@@ -49,7 +49,7 @@ spec:
     - protocol: TCP
       port: 8080
 
----
+----
 
 # Set SYS_TIME for pod
 
@@ -66,7 +66,7 @@ spec:
       capabilities:
         add: ["SYS_TIME"]
 
----
+----
 
 # Create clusterrole and clusterrolebindings
 
@@ -86,7 +86,7 @@ k create clusterrolebinding monitoring-pod-reader-binding --clusterrole=pod-read
 k auth can-i list pods --all-namespaces --as system:serviceaccount:monitoring:monitoring-sa
 
 
----
+----
 
 
 # IP of pod
@@ -98,7 +98,7 @@ kubectl get pods -l app=payment --namespace=finance -o jsonpath='{range .items[*
 kubectl get pods -l app=webserver -o jsonpath='{.items[0].status.podIP}' --namespace=default
 
 
----
+----
 
 # Statefulset container mountpath update
 StatefulSets are ideal for applications that require one or more of the following:
@@ -125,7 +125,7 @@ kubectl rollout status statefulset my-mongodb-statefulset -n my-namespace
 kubectl exec -it my-mongodb-statefulset-0 -n my-namespace -- df -h
 
 
----
+----
 
 
 # cronjob for backups and report generation
@@ -161,7 +161,7 @@ k get cronjobs
 k describe cronjob database-backup
 k get jobs
 
----
+----
 
 # pods name and namespace using jsonpath
 k get pods -A -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.namespace}{"\n"}{end}'

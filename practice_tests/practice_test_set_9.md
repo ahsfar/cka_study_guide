@@ -15,7 +15,7 @@ vim config.yaml # above file
 -> change staticPodPath: etc/kubernetes/manifest
 
 
----
+----
 
 # Tolerant Pod
 
@@ -37,7 +37,7 @@ spec:
     effect: NoSchedule
 
 
----
+----
 
 # init containers
 
@@ -87,7 +87,7 @@ spec:
     targetPort: 9377
 
 
----
+----
 
 # Least privilege (run as non root user) and mounted volume necessary permissions (fsgroup)
 

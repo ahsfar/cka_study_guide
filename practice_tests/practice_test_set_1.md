@@ -19,7 +19,7 @@ k create -f pod.yaml
 k describe pod pod-name
 # verify serviceaccount exists
 
----
+----
 
 # Create a network policy to allow communication on a single port for all pods in a specific namespace
 k create namesapce ns-name label app=website 
@@ -46,13 +46,13 @@ spec:
 k create -f network-policy.yaml
 k describe networkpolicy net-policy
 
----
+----
 
 # Internal IP of all nodes in cluster
 k get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}' > filename.txt
 cat filename.txt
 
----
+----
 
 # Multicontainer pod with a command 
 # in multicontainer pod normally we share data like usign sidecar containers
@@ -64,7 +64,7 @@ vim multipod.yaml
 k create -f multipod.yaml
 k get pods -o wide
 
----
+----
 
 ################################
 # New user with acces on cluster in a specific namesapce
@@ -141,7 +141,7 @@ k get rolebinding -n namespace_name
 # verify
 k auth can-i delete pods -n namesapce_name --as newuser_name
 
----
+----
 
 ################################
 # Create a service from the pod and running DNS lookup to check the service
@@ -151,7 +151,7 @@ k exec -it nslookup -- nslookup my-pod-service-name
 k exec -it nslookup -- nslookup my-pod-service-name > text.txt
 cat text.txt
 
----
+----
 
 # Creating and mounting a secret to the pod
 # ConfigMaps are also used for securing text but secrets more secure way to keep a text secret
