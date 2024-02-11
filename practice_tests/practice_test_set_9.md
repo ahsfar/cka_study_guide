@@ -17,7 +17,24 @@ vim config.yaml # above file
 
 ---
 
-#
+# Tolerant Pod
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  tolerations:
+  - key: "example-key"
+    operator: Equal
+    value: "value1"
+    effect: NoSchedule
 
 
 ---
