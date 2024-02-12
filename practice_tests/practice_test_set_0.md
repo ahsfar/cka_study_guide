@@ -13,13 +13,13 @@ k drain <node_name>
 # Step 2
 apt update
 # Step 3
-apt install kubeadm=1.1.19.0-00
+apt install kubeadm=1.27.0-00
 # Step 4
 kubeadm upgrade apply v1.19.0
 # Step 5
-apt install kubelet=1.1.19.0-00
+apt install kubelet=1.27.0-00
 # Step 6
-apt install kubectl=1.1.19.0-00
+apt install kubectl=1.27.0-00
 # Step 7
 systemctl restart kubelet
 # Step 8
