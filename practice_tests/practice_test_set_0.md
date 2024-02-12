@@ -9,7 +9,7 @@
 
 # Upgrade the cluster (kubeadm;kubelet;kubectl)
 # Step 1
-kubectl drain controlplane --ignore-daemonsets
+k drain controlplane --ignore-daemonsets
 # Step 2
 apt update
 # Step 3
@@ -24,15 +24,15 @@ apt install kubelet=1.27.0-00
 systemctl daemon-reload
 systemctl restart kubelet
 # Step 8
-kubectl uncordon controlplane
+k uncordon controlplane
 
-kubectl describe node controlplane | grep -i taint
-kubectl taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
-kubectl describe node controlplane | grep -i taint
-kubectl get pods -o wide | grep gold
+k describe node controlplane | grep -i taint
+k taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+k describe node controlplane | grep -i taint
+k get pods -o wide | grep gold
 
 # Step 1 in controlplane 
-kubectl drain node01 --ignore-daemonsets
+k drain node01 --ignore-daemonsets
 # Step 2 ssh into node01
 apt update
 # Step 3
@@ -47,7 +47,7 @@ apt install kubelet=1.27.0-00
 systemctl daemon-reload
 systemctl restart kubelet
 # Step 8
-kubectl uncordon node01
+k uncordon node01
 
 
 ----
