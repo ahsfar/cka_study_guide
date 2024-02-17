@@ -25,7 +25,11 @@
 
 ```
 
-### 
+### Practice questions
+
+
+<details><summary>show</summary>
+<p>
 ```bash
 
 => Create a ConfigMap named "my-configmap" with the following key-value pairs:
@@ -82,3 +86,6 @@ k create cronjob my-cronjob --schedule="0 9 * * 1" --image=my-image -- /bin/sh -
 
 
 ```
+
+</p>
+</details>
