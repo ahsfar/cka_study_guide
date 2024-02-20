@@ -33,8 +33,25 @@ sudo kubeadm join [your-master-node-ip]:6443 --token [your-token] --discovery-to
 ```
 
 ### ETCD backup and restore
-  
+
+Check Kubernetes documentaion:
+https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/
+
+
 ```bash
+# Get trusted-ca-file, cert-file and key-file from the description of the etcd Pod.
+
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=<trusted-ca-file> --cert=<cert-file> --key=<key-file> \
+  snapshot save <backup-file-location>
+
+
+ETCDCTL_API=3 etcdctl snapshot restore backup.db \
+  --endpoints=[localhost:2379] \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+  --data-dir /var/lib/etcd-from-backup \
 
 ```
 
@@ -42,6 +59,7 @@ sudo kubeadm join [your-master-node-ip]:6443 --token [your-token] --discovery-to
 ### Reschedule pods to another node
 
 ```bash
+kubectl drain [node-name] --ignore-daemonsets
 
 ```
 
