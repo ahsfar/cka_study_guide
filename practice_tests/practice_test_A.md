@@ -48,5 +48,14 @@ sudo kubeadm join [your-master-node-ip]:6443 --token [your-token] --discovery-to
 ### Create pod expose internally, create another pod to test dns lookup and store pod and service info on file.svc and file.pod
 
 ```bash
+kubectl run my-pod --image=nginx
+
+kubectl expose pod my-pod --port=80 --name=my-service --cluster-ip="None"
+
+
+kubectl run dns-test --image=busybox --restart=Never -- sleep 3600
+kubectl exec dns-test -- nslookup my-service > file.svc
+kubectl get pod my-pod -o wide > file.pod
+
 
 ```
