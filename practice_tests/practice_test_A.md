@@ -20,6 +20,10 @@ https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/
 
 ### Join a workder node to the cluster
 ```bash
+# Run on the master node
+kubeadm token create --print-join-command
+
+sudo kubeadm join [your-master-node-ip]:6443 --token [your-token] --discovery-token-ca-cert-hash sha256:[your-hash]
 
 ```
 
