@@ -27,10 +27,6 @@ sudo kubeadm join [your-master-node-ip]:6443 --token [your-token] --discovery-to
 
 ```
 
-###  Cluster Upgrade to a specific version
-```bash
-
-```
 
 ### ETCD backup and restore
 
