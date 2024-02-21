@@ -5,6 +5,9 @@
 
 ### Rolling update using imperative commands
 ```bash
+kubectl set image deployment/[deployment-name] [container-name]=[new-image]:[tag]
+
+kubectl set image deployment/nginx-deployment nginx=nginx:1.19.0
 
 ```
 
