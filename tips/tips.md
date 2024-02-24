@@ -24,3 +24,6 @@ This is very important if you are not working professionally with K8's.
 
 (Recommended Mock Exam Practice)
 https://kodekloud.com/courses/ultimate-certified-kubernetes-administrator-cka-mock-exam/
+
+Good Resources for tips:
+https://praveendandu24.medium.com/crack-the-cka-exam-in-one-shot-proven-tips-for-first-time-success-58138c2971ef
