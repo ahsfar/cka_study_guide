@@ -19,7 +19,6 @@ Use imperative commands wherever you can to save time and dry-run into yaml form
 This is very important if you are not working professionally with K8's.
 - Practice as much as possible (Time yourself)
 - When you book exam you get killer.sh two sessions that's very similar to actual exam format. (It's generally harder than real exam)
-- 
 
 
 (Recommended Mock Exam Practice)
