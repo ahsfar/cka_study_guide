@@ -17,3 +17,7 @@ For information about the exam, please refer [Certified Kubernetes Administrator
 # News
 
 Policy change: CKA achieved on or after 1st April 2024 will be valid for 2 years only. 
+
+# Impt!
+
+If you're using this as a resource to prepare or guidance can ignore manifest_files and scripts folers. Those were for my own reference. 
