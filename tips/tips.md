@@ -1,5 +1,5 @@
 # CKA Exam Tips
-(Will udpate more after the exam)
+
 Following or some helpful tips I've noticed while preparing for CKA Exam.
 
 ## 1. Fundamentals
