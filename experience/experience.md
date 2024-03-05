@@ -2,10 +2,15 @@
 
 My PSI environment experience was pretty smooth. I believe they've taken care of the issues we see on the internet. 
 
+So, I started preparing for CKA on 16th December the day I passed my AWS DevOps Eng. - Professional. I studied and practiced everyday. Last 2 weeks before exam I just did exam mode practice. So, that's about 2 & half months. 
+
 ## 1. Environment
 
-Google Chrome (K8 documentation)
-Ctrl + C (copy) 
+I finished couple of minutes earlier and spent good amount of time troubleshooting coupel of questions. If you do enough practice I belive time is enough.
+
+In exam I was given links to K8 documentation for each question. 
+link opens in Google Chrome (K8 documentation)
+Ctrl + C (copy) from Google Chrome 
 
 In Terminal: 
 Ctrl + shift + c (copy) 
