@@ -6,7 +6,7 @@ So, I started preparing for CKA on 16th December the day I passed my AWS DevOps 
 
 ## 1. Environment
 
-I finished couple of minutes earlier and spent good amount of time troubleshooting couple of questions. If you do enough practice I belive time is enough.
+I finished couple of minutes earlier and spent good amount of time troubleshooting couple of questions. If you do enough practice I believe time is enough.
 
 In exam I was given links to K8 documentation for each question. 
 link opens in Google Chrome (K8 documentation)
