@@ -35,7 +35,7 @@
 - It supports both imperative and declarative approaches for managing the cluster's state.
 - kubeapi is a central component that enables interaction with the Kubernetes cluster, facilitating administration, monitoring, and scaling of applications and infrastructure.
 
-###  Kube controller managet
+###  Kube controller manager
 
 - The Kubernetes Controller Manager is a core component of the Kubernetes control plane.
 - It runs a set of built-in controllers responsible for managing various aspects of the cluster's desired state.
