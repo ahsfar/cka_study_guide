@@ -145,9 +145,9 @@ e.g.
 
 
 ### Services
-Nodeport: target port:#, port:#, NodePort:# for outside world connectivity to the pod running container
-ClusterIP: Default service
-Loadbalancer: for frontend connecting to outside world. Uses native load balancing of cloud e.g. GCP, AWS, Azure, etc
+* Nodeport: target port:#, port:#, NodePort:# for outside world connectivity to the pod running container
+* ClusterIP: Default service
+* Loadbalancer: for frontend connecting to outside world. Uses native load balancing of cloud e.g. GCP, AWS, Azure, etc
 
 <details><summary>show</summary>
 <p>
